@@ -1,0 +1,44 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+
+const FinalCTA = ({ onNavigate }) => {
+  return (
+    <section className="section-padding" style={{ 
+      background: 'var(--color-primary)', 
+      color: 'white',
+      backgroundImage: 'linear-gradient(to right, rgba(15,23,42,0.9), rgba(15,23,42,0.85)), url(/hero.png)', /* Reusing hero image for background as proxy */
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      textAlign: 'center'
+    }}>
+      <div className="container" style={{ padding: '2rem 0' }}>
+        <div style={{ fontSize: '0.9rem', marginBottom: '1rem', opacity: 0.8 }}>Final CTA</div>
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          style={{ fontSize: '2.5rem', marginBottom: '2.5rem', color: 'white', maxWidth: '700px', margin: '0 auto 2.5rem' }}
+        >
+          Avoid costly legal mistakes as your business grows
+        </motion.h2>
+        
+        <motion.div
+           initial={{ opacity: 0 }}
+           whileInView={{ opacity: 1 }}
+           viewport={{ once: true }}
+           transition={{ delay: 0.2 }}
+           style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}
+        >
+          <button onClick={() => onNavigate('contact')} className="btn btn-teal">
+            Book a Consultation
+          </button>
+          <button className="btn btn-teal-outline" style={{ border: '1px solid rgba(255,255,255,0.4)', color: 'white' }}>
+            Chat on WhatsApp
+          </button>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default FinalCTA;
