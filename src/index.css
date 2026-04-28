@@ -1,13 +1,13 @@
 /* Global Design Tokens & Reset */
 :root {
   /* Color Palette - Matching Prototype */
-  --color-primary: #1e293b; /* Dark slate */
-  --color-primary-dark: #0f172a; 
-  --color-secondary: #0d9488; /* Teal */
-  --color-secondary-light: #14b8a6;
-  --color-bg: #ffffff; /* Clean white */
+  --color-primary: #0f172a; /* Slate 900 */
+  --color-primary-dark: #020617; /* Slate 950 */
+  --color-secondary: #0d9488; /* Teal 600 */
+  --color-secondary-light: #14b8a6; /* Teal 500 */
+  --color-bg: #f1f5f9; /* Slate 100 - Stronger separation */
   --color-surface: #ffffff;
-  --color-text: #475569; /* Slate 600 */
+  --color-text: #334155; /* Slate 700 */
   --color-text-header: #0f172a; /* Near black */
   --color-border: #e2e8f0;
   
@@ -78,15 +78,13 @@ button {
 /* Component Overrides matching Prototype */
 .flat-card {
   background: white;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid var(--color-secondary);
+  border-radius: var(--radius-lg);
+  transition: transform 0.2s, border-color 0.2s;
 }
 
 .flat-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 .flat-header {

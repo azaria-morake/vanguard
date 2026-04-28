@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import ConsultButton from './ConsultButton.jsx';
 
-const FinalCTA = ({ onNavigate }) => {
+const FinalCTA = ({ onNavigate, onContact }) => {
   return (
     <section className="section-padding" style={{ 
       background: 'var(--color-primary)', 
@@ -29,10 +30,10 @@ const FinalCTA = ({ onNavigate }) => {
            transition={{ delay: 0.2 }}
            style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}
         >
-          <button onClick={() => onNavigate('contact')} className="btn btn-teal">
+          <ConsultButton onSelectContact={onContact} className="btn btn-teal">
             Book a Consultation
-          </button>
-          <button className="btn btn-teal-outline" style={{ border: '1px solid rgba(255,255,255,0.4)', color: 'white' }}>
+          </ConsultButton>
+          <button onClick={() => onContact('whatsapp')} className="btn btn-teal-outline" style={{ border: '1px solid rgba(255,255,255,0.4)', color: 'white' }}>
             Chat on WhatsApp
           </button>
         </motion.div>

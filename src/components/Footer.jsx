@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Footer = ({ onNavigate }) => {
+const Footer = ({ onNavigate, onContact }) => {
   return (
     <footer style={{ background: 'var(--color-primary-dark)', color: '#94a3b8', padding: '4rem 0 2rem 0' }}>
       <div className="container">
@@ -25,6 +25,7 @@ const Footer = ({ onNavigate }) => {
               <button onClick={() => onNavigate('home')} style={{ color: 'inherit', textAlign: 'left', padding: 0 }}>Home</button>
               <button onClick={() => onNavigate('about')} style={{ color: 'inherit', textAlign: 'left', padding: 0 }}>About Us</button>
               <button onClick={() => onNavigate('contact')} style={{ color: 'inherit', textAlign: 'left', padding: 0 }}>Contact Us</button>
+              <button onClick={() => onContact('whatsapp')} style={{ color: 'inherit', textAlign: 'left', padding: 0 }}>WhatsApp Us</button>
             </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', fontSize: '0.9rem' }}>
