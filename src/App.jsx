@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
@@ -23,12 +23,23 @@ function App() {
   const [activeView, setActiveView] = useState('home') // home, about, services, contact
   const [contactModal, setContactModal] = useState(null) // null, 'whatsapp', 'email'
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [hoveredView, setHoveredView] = useState(null);
 
   const navigateTo = (view) => {
     setActiveView(view);
     setIsMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activeView]);
+
+  const navItems = [
+    { id: 'home', label: 'Home' },
+    { id: 'about', label: 'About' },
+    { id: 'services', label: 'Services' },
+    { id: 'contact', label: 'Contact' }
+  ];
 
   return (
     <div className="app-container" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: 'white' }}>
@@ -54,10 +65,39 @@ function App() {
           {/* Nav & Buttons */}
           <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
             <nav style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }} className="hide-on-mobile">
-              <button onClick={() => navigateTo('home')} style={{ color: activeView === 'home' ? 'var(--color-secondary)' : 'var(--color-text)', fontWeight: 600, fontSize: '0.9rem' }}>Home</button>
-              <button onClick={() => navigateTo('about')} style={{ color: activeView === 'about' ? 'var(--color-secondary)' : 'var(--color-text)', fontWeight: 500, fontSize: '0.9rem' }}>About</button>
-              <button onClick={() => navigateTo('services')} style={{ color: activeView === 'services' ? 'var(--color-secondary)' : 'var(--color-text)', fontWeight: 500, fontSize: '0.9rem' }}>Services</button>
-              <button onClick={() => navigateTo('contact')} style={{ color: activeView === 'contact' ? 'var(--color-secondary)' : 'var(--color-text)', fontWeight: 500, fontSize: '0.9rem' }}>Contact</button>
+              {navItems.map((item) => (
+                <button 
+                  key={item.id}
+                  onClick={() => navigateTo(item.id)} 
+                  onMouseEnter={() => setHoveredView(item.id)}
+                  onMouseLeave={() => setHoveredView(null)}
+                  style={{ 
+                    position: 'relative',
+                    color: activeView === item.id ? 'var(--color-primary)' : 'var(--color-text)', 
+                    fontWeight: activeView === item.id ? 700 : 500, 
+                    fontSize: '0.9rem',
+                    padding: '0.5rem 0',
+                    transition: 'color 0.2s'
+                  }}
+                >
+                  {item.label}
+                  {(hoveredView === item.id || (hoveredView === null && activeView === item.id)) && (
+                    <motion.div 
+                      layoutId="nav-underline"
+                      style={{ 
+                        position: 'absolute', 
+                        bottom: 0, 
+                        left: 0, 
+                        right: 0, 
+                        height: '2px', 
+                        background: 'var(--color-primary)',
+                        zIndex: 1
+                      }}
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </button>
+              ))}
             </nav>
             <div style={{ borderLeft: '1px solid var(--color-border)', height: '30px' }} className="hide-on-mobile"></div>
             <div style={{ display: 'flex', gap: '0.5rem' }} className="hide-on-mobile">

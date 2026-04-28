@@ -107,45 +107,61 @@ const AboutView = ({ onNavigate, onContact }) => {
                 We focus on helping businesses get things right from the start — avoiding costly issues later.
               </p>
             </motion.div>
-          </div>
+        </div>
+      </div>
 
-          {/* Bottom Call to Action Section */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="about-cta-container"
-            style={{ 
-              marginTop: '5rem', 
-              background: 'var(--color-primary)', 
-              borderRadius: 'var(--radius-lg)', 
-              position: 'relative',
-              overflow: 'hidden',
-              minHeight: '350px',
-              display: 'flex',
-              alignItems: 'center',
-              boxShadow: '0 20px 40px -15px rgba(0,0,0,0.3)'
-            }}
-          >
-            {/* Left side Image with Fade */}
-            <div className="about-cta-image-container" style={{ 
+      {/* Full-width CTA Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="about-cta-container"
+          style={{ 
+            marginTop: '5rem', 
+            background: 'var(--color-primary)', 
+            position: 'relative',
+            overflow: 'visible', // Changed to visible
+            minHeight: '400px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          {/* Background Clipping Container */}
+          <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
+            {/* Desktop Image - Fixed width to prevent overlap */}
+            <div className="about-cta-image-container hide-on-mobile" style={{ 
               position: 'absolute', 
               left: 0, 
               top: 0, 
-              width: '50%', 
+              width: '40%', 
               height: '100%', 
               backgroundImage: 'url(/team.png)', 
               backgroundSize: 'cover', 
-              backgroundPosition: 'center',
-              borderBottomRightRadius: '100px'
+              backgroundPosition: 'center'
             }}>
-               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, var(--color-primary) 0%, rgba(15,23,42,0) 40%)' }}></div>
+               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(15,23,42,0) 60%, var(--color-primary) 100%)' }}></div>
             </div>
-            
-            {/* Content properly shifted to the right half */}
-            <div className="responsive-grid" style={{ position: 'relative', zIndex: 10, display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', width: '100%', gap: '4rem', padding: '4rem' }}>
+
+            {/* Mobile Image - Full width top background */}
+            <div className="about-cta-image-container show-on-mobile" style={{ 
+              position: 'relative', 
+              width: '100%', 
+              height: '250px', 
+              backgroundImage: 'url(/team.png)', 
+              backgroundSize: 'cover', 
+              backgroundPosition: 'center'
+            }}>
+               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--color-primary) 0%, rgba(15,23,42,0) 50%)' }}></div>
+            </div>
+          </div>
+          
+          {/* Content properly aligned to the grid container */}
+          <div className="container" style={{ position: 'relative', zIndex: 10, width: '100%' }}>
+            <div className="responsive-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem' }}>
                <div className="hide-on-mobile"></div> {/* Leaves left empty */}
-               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start' }}>
+               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', padding: '4rem var(--spacing-6)' }}>
                  <h3 style={{ fontSize: '2.2rem', color: 'white', marginBottom: '1.5rem', lineHeight: 1.2 }}>
                    Work with a legal partner who understands your business
                  </h3>
@@ -156,9 +172,9 @@ const AboutView = ({ onNavigate, onContact }) => {
                  </div>
                </div>
             </div>
+          </div>
 
-          </motion.div>
-        </div>
+        </motion.div>
       </section>
     </motion.div>
   );

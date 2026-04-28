@@ -4,8 +4,8 @@ import ConsultButton from './ConsultButton.jsx';
 
 const FinalCTA = ({ onNavigate, onContact }) => {
   return (
-    <section className="section-padding" style={{ 
-      background: 'var(--color-primary)', 
+    <section className="section-padding" style={{
+      background: 'var(--color-primary)',
       color: 'white',
       backgroundImage: 'linear-gradient(to right, rgba(15,23,42,0.9), rgba(15,23,42,0.85)), url(/hero.png)', /* Reusing hero image for background as proxy */
       backgroundSize: 'cover',
@@ -13,8 +13,8 @@ const FinalCTA = ({ onNavigate, onContact }) => {
       textAlign: 'center'
     }}>
       <div className="container" style={{ padding: '4rem var(--spacing-6)' }}>
-        <div style={{ fontSize: '0.9rem', marginBottom: '1rem', opacity: 0.8 }}>Final CTA</div>
-        <motion.h2 
+        {/* <div style={{ fontSize: '0.9rem', marginBottom: '1rem', opacity: 0.8 }}>Final CTA</div> */}
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -23,14 +23,14 @@ const FinalCTA = ({ onNavigate, onContact }) => {
         >
           Avoid costly legal mistakes as your business grows
         </motion.h2>
-        
+
         <motion.div
-           initial={{ opacity: 0 }}
-           whileInView={{ opacity: 1 }}
-           viewport={{ once: true }}
-           transition={{ delay: 0.2 }}
-           className="hero-cta-group"
-           style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="hero-cta-group"
+          style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}
         >
           <ConsultButton onSelectContact={onContact} className="btn btn-teal">
             Book a Consultation

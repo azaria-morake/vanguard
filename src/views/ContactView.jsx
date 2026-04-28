@@ -3,6 +3,25 @@ import { motion } from 'framer-motion';
 import ConsultButton from '../components/ConsultButton.jsx';
 
 const ContactView = ({ onContact }) => {
+  const [formData, setFormData] = React.useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleWhatsAppSubmit = (e) => {
+    e.preventDefault();
+    const { name, email, message } = formData;
+    const text = `Hello! I'm ${name}.${email ? ` My email is ${email}.` : ''} I'm interested in: ${message}`;
+    const encodedText = encodeURIComponent(text);
+    window.open(`https://wa.me/27123456789?text=${encodedText}`, '_blank');
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -14,7 +33,7 @@ const ContactView = ({ onContact }) => {
       <section style={{ position: 'relative', display: 'flex', alignItems: 'center', background: 'white' }}>
         <div className="container hero-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem', alignItems: 'center', padding: '6rem 0' }}>
           
-          <div className="hero-content" style={{ zIndex: 10 }}>
+          <div className="hero-content" style={{ zIndex: 10, width: '100%' }}>
             <motion.h1 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -38,31 +57,49 @@ const ContactView = ({ onContact }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               className="flat-card" 
-              style={{ padding: '2.5rem' }}
+              style={{ padding: '2.5rem', width: '100%', maxWidth: '600px' }}
             >
-              <form style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }} onSubmit={(e) => e.preventDefault()}>
+              <form style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }} onSubmit={handleWhatsAppSubmit}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                   <label style={{ fontWeight: 600, color: 'var(--color-primary)', fontSize: '0.9rem' }}>Name</label>
-                  <input type="text" placeholder="Your name" style={{ padding: '0.8rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', outline: 'none' }} />
+                  <input 
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    type="text" 
+                    placeholder="Your name" 
+                    required
+                    style={{ padding: '0.8rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-secondary)', outline: 'none' }} 
+                  />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                   <label style={{ fontWeight: 600, color: 'var(--color-primary)', fontSize: '0.9rem' }}>Email</label>
-                  <input type="email" placeholder="you@company.com" style={{ padding: '0.8rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', outline: 'none' }} />
+                  <input 
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    type="email" 
+                    placeholder="you@company.com" 
+                    style={{ padding: '0.8rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-secondary)', outline: 'none' }} 
+                  />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                   <label style={{ fontWeight: 600, color: 'var(--color-primary)', fontSize: '0.9rem' }}>How can we help?</label>
-                  <textarea rows={4} placeholder="Briefly describe your needs..." style={{ padding: '0.8rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', outline: 'none', resize: 'vertical' }}></textarea>
+                  <textarea 
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    rows={8} 
+                    placeholder="Briefly describe your needs..." 
+                    required
+                    style={{ padding: '0.8rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-secondary)', outline: 'none', resize: 'vertical' }}
+                  ></textarea>
                 </div>
-                <ConsultButton onSelectContact={onContact} className="btn btn-teal" style={{ marginTop: '0.5rem', width: '100%' }}>
-                  Book a Consultation
-                </ConsultButton>
+                
+                <button type="submit" className="btn btn-teal" style={{ width: '100%', marginTop: '0.5rem' }}>
+                  Send to WhatsApp
+                </button>
               </form>
-
-              <div style={{ textAlign: 'center', margin: '1.25rem 0', color: 'var(--color-text)' }}>— OR —</div>
-
-              <button onClick={() => onContact('whatsapp')} className="btn btn-teal-outline" style={{ width: '100%' }}>
-                Chat on WhatsApp
-              </button>
             </motion.div>
           </div>
           

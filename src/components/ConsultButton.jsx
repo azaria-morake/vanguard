@@ -36,16 +36,18 @@ const ConsultButton = ({ onSelectContact, children, className, style }) => {
             style={{
               position: 'absolute',
               top: '100%',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              marginTop: '0.5rem',
+              left: 0,
+              right: 0,
+              marginTop: '0.75rem',
               background: 'white',
-              borderRadius: '12px',
-              boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1)',
+              borderRadius: 'var(--radius-lg)',
+              border: '1px solid var(--color-secondary)',
+              boxShadow: '0 20px 40px -15px rgba(0,0,0,0.15)',
               padding: '0.5rem',
               display: 'flex',
-              gap: '0.5rem',
-              zIndex: 100
+              flexDirection: 'column',
+              zIndex: 100,
+              overflow: 'hidden'
             }}
           >
             <button 
@@ -53,36 +55,52 @@ const ConsultButton = ({ onSelectContact, children, className, style }) => {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                width: '45px',
-                height: '45px',
-                borderRadius: '8px',
-                background: '#25D366',
-                color: 'white',
+                gap: '0.75rem',
+                width: '100%',
+                padding: '0.75rem 1rem',
+                borderRadius: 'var(--radius-sm)',
+                background: 'transparent',
+                color: 'var(--color-primary)',
                 border: 'none',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                transition: 'background 0.2s',
+                textAlign: 'left'
               }}
-              title="WhatsApp"
+              onMouseOver={e => e.currentTarget.style.background = 'rgba(13,148,136,0.08)'}
+              onMouseOut={e => e.currentTarget.style.background = 'transparent'}
             >
-              <MessageCircle size={24} />
+              <div style={{ color: 'var(--color-secondary)', display: 'flex', alignItems: 'center' }}>
+                <MessageCircle size={20} />
+              </div>
+              <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>WhatsApp</span>
             </button>
+
+            {/* Themed Separator Line */}
+            <div style={{ height: '1px', background: 'var(--color-secondary)', opacity: 0.2, margin: '0.25rem 0.5rem' }}></div>
+
             <button 
               onClick={() => { setIsOpen(false); onSelectContact('email'); }}
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                width: '45px',
-                height: '45px',
-                borderRadius: '8px',
-                background: '#EA4335',
-                color: 'white',
+                gap: '0.75rem',
+                width: '100%',
+                padding: '0.75rem 1rem',
+                borderRadius: 'var(--radius-sm)',
+                background: 'transparent',
+                color: 'var(--color-primary)',
                 border: 'none',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                transition: 'background 0.2s',
+                textAlign: 'left'
               }}
-              title="Email"
+              onMouseOver={e => e.currentTarget.style.background = 'rgba(13,148,136,0.08)'}
+              onMouseOut={e => e.currentTarget.style.background = 'transparent'}
             >
-              <Mail size={24} />
+              <div style={{ color: 'var(--color-secondary)', display: 'flex', alignItems: 'center' }}>
+                <Mail size={20} />
+              </div>
+              <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>Email</span>
             </button>
           </motion.div>
         )}

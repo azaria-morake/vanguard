@@ -67,7 +67,18 @@ const AboutSection = () => {
               'Risk mitigation integrated into your workflow'
             ].map((item, i) => (
               <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem', fontSize: '1.05rem', color: '#f8fafc' }}>
-                <div style={{ background: 'var(--color-secondary)', width: '24px', height: '24px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '0.8rem' }}>
+                <div style={{ 
+                  background: 'var(--color-secondary)', 
+                  width: '24px', 
+                  height: '24px', 
+                  borderRadius: '50%', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  color: 'white', 
+                  fontSize: '0.8rem',
+                  flexShrink: 0 
+                }}>
                   ✔
                 </div>
                 {item}

@@ -1,6 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 const Footer = ({ onNavigate, onContact }) => {
+  const [hoveredLink, setHoveredLink] = useState(null);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const navGroups = [
+    {
+      title: 'Company',
+      links: [
+        { id: 'home', label: 'Home', type: 'nav' },
+        { id: 'about', label: 'About Us', type: 'nav' },
+        { id: 'services', label: 'Services', type: 'nav' },
+      ]
+    },
+    {
+      title: 'Support',
+      links: [
+        { id: 'contact', label: 'Contact Us', type: 'nav' },
+        { id: 'whatsapp', label: 'WhatsApp Us', type: 'contact' },
+        { id: 'login', label: 'Login', type: 'action' },
+      ]
+    }
+  ];
+
   return (
     <footer style={{ background: 'var(--color-primary-dark)', color: '#94a3b8', padding: '4rem 0 2rem 0' }}>
       <div className="container">
@@ -21,24 +47,74 @@ const Footer = ({ onNavigate, onContact }) => {
           </div>
 
           <div className="responsive-grid" style={{ display: 'flex', gap: '5rem', flexWrap: 'wrap' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', fontSize: '0.9rem' }}>
-              <button onClick={() => onNavigate('home')} style={{ color: 'inherit', textAlign: 'left', padding: 0 }}>Home</button>
-              <button onClick={() => onNavigate('about')} style={{ color: 'inherit', textAlign: 'left', padding: 0 }}>About Us</button>
-              <button onClick={() => onNavigate('contact')} style={{ color: 'inherit', textAlign: 'left', padding: 0 }}>Contact Us</button>
-              <button onClick={() => onContact('whatsapp')} style={{ color: 'inherit', textAlign: 'left', padding: 0 }}>WhatsApp Us</button>
-            </div>
-            
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', fontSize: '0.9rem' }}>
-              <span style={{ cursor: 'pointer' }}>Login</span>
-              <button onClick={() => onNavigate('contact')} style={{ color: 'inherit', textAlign: 'left', padding: 0 }}>Contact</button>
-              <span style={{ cursor: 'pointer' }}>Fonts</span>
-            </div>
+            {navGroups.map((group, gIdx) => (
+              <div key={gIdx} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontSize: '0.9rem' }}>
+                {group.links.map((link) => (
+                  <button 
+                    key={link.id}
+                    onMouseEnter={() => setHoveredLink(link.id)}
+                    onMouseLeave={() => setHoveredLink(null)}
+                    onClick={() => link.type === 'nav' ? onNavigate(link.id) : link.type === 'contact' ? onContact(link.id) : null} 
+                    style={{ 
+                      color: hoveredLink === link.id ? 'white' : 'inherit', 
+                      textAlign: 'left', 
+                      padding: '0.2rem 0',
+                      transition: 'color 0.2s',
+                      position: 'relative',
+                      display: 'inline-block',
+                      width: 'fit-content',
+                      background: 'transparent',
+                      border: 'none',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {link.label}
+                    {hoveredLink === link.id && (
+                      <motion.div 
+                        layoutId="footer-underline"
+                        style={{ 
+                          position: 'absolute', 
+                          bottom: 0, 
+                          left: 0, 
+                          right: 0, 
+                          height: '1px', 
+                          background: 'white' 
+                        }}
+                      />
+                    )}
+                  </button>
+                ))}
+              </div>
+            ))}
           </div>
           
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
-            <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <div style={{ width: '15px', height: '15px', background: 'var(--color-secondary)', borderRadius: '50%' }}></div> {/* Generic logo replacement */}
-            </div>
+            <button 
+              onClick={scrollToTop}
+              title="Scroll to Top"
+              style={{ 
+                width: '45px', 
+                height: '45px', 
+                borderRadius: '50%', 
+                background: 'rgba(255,255,255,0.05)', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                border: '1px solid rgba(255,255,255,0.1)',
+                cursor: 'pointer',
+                transition: 'all 0.3s'
+              }}
+              onMouseOver={e => {
+                e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
+                e.currentTarget.style.borderColor = 'var(--color-secondary)';
+              }}
+              onMouseOut={e => {
+                e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+              }}
+            >
+              <div style={{ width: '12px', height: '12px', background: 'var(--color-secondary)', borderRadius: '50%' }}></div> 
+            </button>
           </div>
 
         </div>
