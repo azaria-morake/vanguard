@@ -12,12 +12,13 @@ const FinalCTA = ({ onNavigate, onContact }) => {
       backgroundPosition: 'center',
       textAlign: 'center'
     }}>
-      <div className="container" style={{ padding: '2rem 0' }}>
+      <div className="container" style={{ padding: '4rem var(--spacing-6)' }}>
         <div style={{ fontSize: '0.9rem', marginBottom: '1rem', opacity: 0.8 }}>Final CTA</div>
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          className="cta-title"
           style={{ fontSize: '2.5rem', marginBottom: '2.5rem', color: 'white', maxWidth: '700px', margin: '0 auto 2.5rem' }}
         >
           Avoid costly legal mistakes as your business grows
@@ -28,6 +29,7 @@ const FinalCTA = ({ onNavigate, onContact }) => {
            whileInView={{ opacity: 1 }}
            viewport={{ once: true }}
            transition={{ delay: 0.2 }}
+           className="hero-cta-group"
            style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}
         >
           <ConsultButton onSelectContact={onContact} className="btn btn-teal">

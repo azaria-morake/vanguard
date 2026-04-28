@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const AboutSection = () => {
   return (
-    <section style={{ 
+    <section className="about-section" style={{ 
       position: 'relative', 
       display: 'flex', 
       alignItems: 'center', 
@@ -19,6 +19,7 @@ const AboutSection = () => {
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
+        className="about-image-container"
         style={{ 
           height: '100%', 
           position: 'absolute', 
@@ -32,19 +33,20 @@ const AboutSection = () => {
         }}
       >
         {/* Gradient fading to the right side so it blends into the blue background */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, var(--color-primary) 0%, rgba(15,23,42,0) 30%)' }}></div>
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, var(--color-primary) 0%, rgba(15,23,42,0) 30%)' }} className="hide-on-mobile"></div>
       </motion.div>
 
-      <div className="container" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem', alignItems: 'center' }}>
+      <div className="container about-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem', alignItems: 'center' }}>
         
         {/* Empty left column to push content to the right */}
-        <div></div>
+        <div className="hide-on-mobile"></div>
 
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
+          className="about-content"
           style={{ zIndex: 10, padding: '6rem 0' }}
         >
           <div style={{ fontSize: '0.9rem', color: 'var(--color-secondary-light)', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '1rem' }}>

@@ -13,33 +13,37 @@ const AboutView = ({ onNavigate, onContact }) => {
     >
       {/* Hero-style Section */}
       <section style={{ position: 'relative', display: 'flex', alignItems: 'center', background: 'white', paddingTop: '100px' }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem', alignItems: 'center', minHeight: '60vh' }}>
+        <div className="container hero-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem', alignItems: 'center', minHeight: '60vh' }}>
           
-          <div style={{ zIndex: 10, padding: '2rem 0 4rem 0' }}>
+          <div className="hero-content" style={{ zIndex: 10, padding: '2rem 0 4rem 0' }}>
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
+              className="responsive-title"
               style={{ fontSize: '3rem', color: 'var(--color-primary)', marginBottom: '1.5rem', lineHeight: 1.1 }}
             >
               Practical legal support built for SMEs
             </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              style={{ fontSize: '1.15rem', color: 'var(--color-text)', marginBottom: '1.5rem', lineHeight: 1.6 }}
-            >
-              Vanguard Legal exists to provide SMEs with clear, practical legal and compliance support that makes business sense.
-            </motion.p>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              style={{ fontSize: '1.15rem', color: 'var(--color-text)', lineHeight: 1.6 }}
-            >
-              We work closely with business owners to simplify complex legal requirements, manage risk and support confident decision-making as they grow.
-            </motion.p>
+            
+            <div className="hero-body-content">
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                style={{ fontSize: '1.15rem', color: 'var(--color-text)', marginBottom: '1.5rem', lineHeight: 1.6 }}
+              >
+                Vanguard Legal exists to provide SMEs with clear, practical legal and compliance support that makes business sense.
+              </motion.p>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                style={{ fontSize: '1.15rem', color: 'var(--color-text)', lineHeight: 1.6 }}
+              >
+                We work closely with business owners to simplify complex legal requirements, manage risk and support confident decision-making as they grow.
+              </motion.p>
+            </div>
           </div>
           
           {/* Right Hero Image matching Home Hero Fade */}
@@ -47,6 +51,7 @@ const AboutView = ({ onNavigate, onContact }) => {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
+            className="hero-image-container"
             style={{ 
               height: '100%', 
               position: 'absolute', 
@@ -68,7 +73,7 @@ const AboutView = ({ onNavigate, onContact }) => {
 
       <section className="section-padding" style={{ background: 'var(--color-bg)' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem' }}>
+          <div className="responsive-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem' }}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -109,6 +114,7 @@ const AboutView = ({ onNavigate, onContact }) => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            className="about-cta-container"
             style={{ 
               marginTop: '5rem', 
               background: 'var(--color-primary)', 
@@ -122,7 +128,7 @@ const AboutView = ({ onNavigate, onContact }) => {
             }}
           >
             {/* Left side Image with Fade */}
-            <div style={{ 
+            <div className="about-cta-image-container" style={{ 
               position: 'absolute', 
               left: 0, 
               top: 0, 
@@ -137,15 +143,17 @@ const AboutView = ({ onNavigate, onContact }) => {
             </div>
             
             {/* Content properly shifted to the right half */}
-            <div style={{ position: 'relative', zIndex: 10, display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', width: '100%', gap: '4rem', padding: '4rem' }}>
-               <div></div> {/* Leaves left empty */}
+            <div className="responsive-grid" style={{ position: 'relative', zIndex: 10, display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', width: '100%', gap: '4rem', padding: '4rem' }}>
+               <div className="hide-on-mobile"></div> {/* Leaves left empty */}
                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start' }}>
                  <h3 style={{ fontSize: '2.2rem', color: 'white', marginBottom: '1.5rem', lineHeight: 1.2 }}>
                    Work with a legal partner who understands your business
                  </h3>
-                 <ConsultButton onSelectContact={onContact} className="btn btn-teal">
-                   Book a consultation
-                 </ConsultButton>
+                 <div className="hero-cta-group">
+                   <ConsultButton onSelectContact={onContact} className="btn btn-teal">
+                     Book a consultation
+                   </ConsultButton>
+                 </div>
                </div>
             </div>
 

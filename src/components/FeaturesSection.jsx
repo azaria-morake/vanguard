@@ -14,7 +14,7 @@ const HelpCard = ({ icon: Icon, title, desc, delay }) => (
       flexDirection: 'column', 
       gap: '1rem', 
       alignItems: 'flex-start',
-      aspectRatio: '1 / 1',
+      minHeight: '200px',
       justifyContent: 'center',
       background: 'white',
       border: '1px solid var(--color-secondary)',
@@ -61,12 +61,12 @@ const FeaturesSection = () => {
     <section className="section-padding" style={{ background: 'white' }}>
       <div className="container">
         
-        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) auto minmax(0, 1fr)', gap: '4rem', alignItems: 'stretch' }}>
+        <div className="responsive-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) auto minmax(0, 1fr)', gap: '4rem', alignItems: 'stretch' }}>
           
           {/* Left Column: How We Help (Square Cards) */}
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <h2 style={{ fontSize: '2rem', color: 'var(--color-primary)', marginBottom: '2.5rem' }}>How We Help</h2>
-            <div style={{ 
+            <div className="responsive-grid" style={{ 
               display: 'grid', 
               gridTemplateColumns: 'repeat(2, 1fr)', 
               gap: '1.5rem',

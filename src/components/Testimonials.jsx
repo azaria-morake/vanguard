@@ -39,7 +39,7 @@ const Testimonials = () => {
       <div className="container">
         <h2 style={{ fontSize: '2rem', color: 'var(--color-primary)', marginBottom: '2rem' }}>Testimonials</h2>
         
-        <div style={{ 
+        <div className="responsive-grid" style={{ 
           display: 'grid', 
           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
           gap: '1.5rem',

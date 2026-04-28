@@ -4,7 +4,7 @@ const Footer = ({ onNavigate, onContact }) => {
   return (
     <footer style={{ background: 'var(--color-primary-dark)', color: '#94a3b8', padding: '4rem 0 2rem 0' }}>
       <div className="container">
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '3rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '3rem', marginBottom: '2rem' }}>
+        <div className="responsive-grid" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '3rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '3rem', marginBottom: '2rem' }}>
           
           <div style={{ maxWidth: '300px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', cursor: 'pointer' }} onClick={() => onNavigate('home')}>
@@ -20,7 +20,7 @@ const Footer = ({ onNavigate, onContact }) => {
             </p>
           </div>
 
-          <div style={{ display: 'flex', gap: '5rem', flexWrap: 'wrap' }}>
+          <div className="responsive-grid" style={{ display: 'flex', gap: '5rem', flexWrap: 'wrap' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', fontSize: '0.9rem' }}>
               <button onClick={() => onNavigate('home')} style={{ color: 'inherit', textAlign: 'left', padding: 0 }}>Home</button>
               <button onClick={() => onNavigate('about')} style={{ color: 'inherit', textAlign: 'left', padding: 0 }}>About Us</button>

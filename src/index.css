@@ -44,6 +44,8 @@ html, body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -138,4 +140,163 @@ button {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile Responsiveness Utility Classes */
+@media (max-width: 768px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+  
+  .show-on-mobile {
+    display: block !important;
+  }
+
+  main {
+    padding-top: 0 !important;
+  }
+
+  .section-padding {
+    padding: 3rem 0;
+  }
+
+  h1 { font-size: 2.25rem !important; }
+  h2 { font-size: 1.75rem !important; }
+  h3 { font-size: 1.5rem !important; }
+
+  .hero-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
+  }
+
+  .hero-section {
+    padding-top: 80px !important; /* Sync with fixed header height */
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    gap: 0 !important;
+    padding-top: 0 !important;
+    overflow: visible !important;
+  }
+
+  .hero-content {
+    padding: 2.5rem var(--spacing-6) !important;
+    text-align: left !important; /* Reverting to left as requested */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important; /* Left aligned text content */
+    width: 100% !important;
+  }
+
+  .hero-cta-group {
+    width: 100% !important;
+    justify-content: center !important; /* Buttons stay centered as requested */
+    gap: 0.75rem !important;
+    margin-right: 0 !important;
+  }
+
+  .hero-image-container {
+    position: relative !important;
+    width: 100vw !important;
+    margin-left: calc(-1 * var(--spacing-6)) !important;
+    margin-right: calc(-1 * var(--spacing-6)) !important;
+    max-width: none !important;
+    height: 320px !important;
+    margin-top: 0 !important; /* Flush with section top */
+    border-radius: 0 !important;
+    order: -1;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+
+  .responsive-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .about-section {
+    min-height: auto !important;
+    flex-direction: column;
+  }
+
+  .about-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
+  }
+
+  .about-content {
+    padding: 2rem 0 !important;
+  }
+
+  .about-image-container {
+    position: relative !important;
+    width: 100vw !important;
+    margin-left: calc(-1 * var(--spacing-6)) !important;
+    margin-right: calc(-1 * var(--spacing-6)) !important;
+    max-width: none !important;
+    height: 300px !important;
+    margin-top: 0 !important;
+    border-radius: 0 !important;
+    order: -1; /* Image first on mobile */
+    background-size: cover !important;
+    background-position: center !important;
+  }
+
+  /* Blending for about section (left-aligned image) */
+  .about-image-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--color-primary) 0%, rgba(15,23,42,0) 25%);
+    pointer-events: none;
+  }
+
+  .about-cta-container {
+    min-height: auto !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .about-cta-image-container {
+    position: relative !important;
+    width: 100% !important; /* Spans full width of its card */
+    height: 250px !important;
+    margin-top: 0 !important;
+    border-radius: 0 !important; /* Docked to the top and sides of the card */
+    background-size: cover !important;
+    background-position: center !important;
+  }
+
+  /* Blending for CTA images inside cards */
+  .about-cta-image-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--color-primary) 0%, rgba(15,23,42,0) 25%);
+    pointer-events: none;
+  }
+
+  .how-steps-container {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .cta-title {
+    font-size: 1.8rem !important;
+  }
+
+  .credibility-strip {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .show-on-mobile {
+    display: none !important;
+  }
 }

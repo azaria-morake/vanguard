@@ -41,78 +41,107 @@ const ServicesView = ({ onNavigate, onContact }) => {
       transition={{ duration: 0.4 }}
       style={{ minHeight: '80vh', paddingBottom: '6rem' }}
     >
-      <div style={{ 
-        height: '40vh', minHeight: '300px', 
-        backgroundImage: 'linear-gradient(rgba(15,23,42,0.8), rgba(15,23,42,0.85)), url(/services.png)', 
-        backgroundSize: 'cover', backgroundPosition: 'center',
-        display: 'flex', alignItems: 'center', justifyContent: 'center'
-      }}>
-        <div className="container" style={{ textAlign: 'center', color: 'white' }}>
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            style={{ fontSize: '3rem', marginBottom: '1rem', color: 'white' }}
-          >
-            Legal support for every stage of your business
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            style={{ fontSize: '1.25rem', opacity: 0.9 }}
-          >
-            Clear, practical legal and compliance support designed for SMEs.
-          </motion.p>
-        </div>
-      </div>
-
-      <section className="section-padding" style={{ background: 'var(--color-bg)' }}>
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginBottom: '5rem' }}>
-            {services.map((svc, i) => <ServiceCategory key={i} {...svc} delay={0.1 * i} />)}
+      <section style={{ position: 'relative', display: 'flex', alignItems: 'center', background: 'var(--color-primary-dark)', overflow: 'hidden' }}>
+        <div className="container hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center', minHeight: '40vh', padding: '4rem 0' }}>
+          
+          <div className="hero-content" style={{ zIndex: 10, textAlign: 'left', color: 'white' }}>
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              style={{ fontSize: '3rem', marginBottom: '1rem', color: 'white' }}
+            >
+              Legal support for every stage of your business
+            </motion.h1>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              style={{ fontSize: '1.25rem', opacity: 0.9 }}
+            >
+              Clear, practical legal and compliance support designed for SMEs.
+            </motion.p>
           </div>
 
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="hero-image-container"
             style={{ 
-              marginTop: '5rem', 
-              background: 'var(--color-primary)', 
-              borderRadius: 'var(--radius-lg)', 
-              position: 'relative',
-              overflow: 'hidden',
-              minHeight: '380px',
-              display: 'flex',
-              alignItems: 'center',
-              boxShadow: '0 20px 40px -15px rgba(0,0,0,0.3)'
+              position: 'absolute', right: 0, top: 0, height: '100%', width: '45%',
+              backgroundImage: 'url(/services.png)', 
+              backgroundSize: 'cover', backgroundPosition: 'center',
+              borderBottomLeftRadius: '60px'
             }}
           >
-            {/* Left side Image with Fade */}
-            <div style={{ 
-              position: 'absolute', 
-              left: 0, 
-              top: 0, 
-              width: '50%', 
-              height: '100%', 
-              backgroundImage: 'url(/contact.png)', 
-              backgroundSize: 'cover', 
-              backgroundPosition: 'center',
-              borderBottomRightRadius: '100px'
-            }}>
-               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, var(--color-primary) 0%, rgba(15,23,42,0) 40%)' }}></div>
-            </div>
-            
-            {/* Content properly shifted to the right half */}
-            <div style={{ position: 'relative', zIndex: 10, display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', width: '100%', gap: '4rem', padding: '4rem' }}>
-               <div></div> {/* Leaves left empty */}
-               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start' }}>
-                 <h3 style={{ fontSize: '2.2rem', color: 'white', marginBottom: '1.5rem', lineHeight: 1.2 }}>
+             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, var(--color-primary-dark) 0%, rgba(15,23,42,0) 25%)' }}></div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="section-padding" style={{ background: 'var(--color-bg)' }}>
+        <div className="container">
+          <div className="responsive-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginBottom: '5rem' }}>
+            {services.map((svc, i) => <ServiceCategory key={i} {...svc} delay={0.1 * i} />)}
+          </div>
+        </div>
+
+        {/* Full-width CTA Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="about-cta-container"
+          style={{ 
+            marginTop: '5rem', 
+            background: 'var(--color-primary)', 
+            position: 'relative',
+            overflow: 'hidden',
+            minHeight: '450px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          {/* Left side Image - Fixed width on desktop to prevent overlap */}
+          <div className="about-cta-image-container hide-on-mobile" style={{ 
+            position: 'absolute', 
+            left: 0, 
+            top: 0, 
+            width: '40%', 
+            height: '100%', 
+            backgroundImage: 'url(/contact.png)', 
+            backgroundSize: 'cover', 
+            backgroundPosition: 'left center'
+          }}>
+             {/* Strong gradient to fade into dark background */}
+             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(15,23,42,0) 60%, var(--color-primary) 100%)' }}></div>
+          </div>
+
+          {/* Mobile Image - Full width top background */}
+          <div className="about-cta-image-container show-on-mobile" style={{ 
+            position: 'relative', 
+            width: '100%', 
+            height: '250px', 
+            backgroundImage: 'url(/contact.png)', 
+            backgroundSize: 'cover', 
+            backgroundPosition: 'center'
+          }}>
+             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--color-primary) 0%, rgba(15,23,42,0) 50%)' }}></div>
+          </div>
+          
+          {/* Content properly aligned to the grid container */}
+          <div className="container" style={{ position: 'relative', zIndex: 10, width: '100%' }}>
+            <div className="responsive-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem' }}>
+               <div className="hide-on-mobile"></div> {/* Leaves left empty */}
+               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', padding: '4rem var(--spacing-6)' }}>
+                 <h3 style={{ fontSize: '2.5rem', color: 'white', marginBottom: '1.5rem', lineHeight: 1.1 }}>
                    Clear and transparent pricing
                  </h3>
-                 <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.8rem', marginBottom: '2rem' }}>
+                 <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2.5rem' }}>
                   {["Fixed-fee services where possible", "Upfront pricing clarity", "No unnecessary hourly billing"].map((item, i) => (
-                    <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem', color: '#cbd5e1', fontSize: '1.1rem' }}>
+                    <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem', color: '#cbd5e1', fontSize: '1.15rem' }}>
                       <div style={{ background: 'var(--color-secondary)', width: '24px', height: '24px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '0.8rem', flexShrink: 0 }}>
                         ✔
                       </div>
@@ -120,16 +149,17 @@ const ServicesView = ({ onNavigate, onContact }) => {
                     </li>
                   ))}
                  </ul>
-                 <div style={{ marginBottom: '1.5rem', fontSize: '1.1rem', color: '#cbd5e1' }}>Not sure where to start? We'll guide you.</div>
-                 <ConsultButton onSelectContact={onContact} className="btn btn-teal">
-                   Book a consultation
-                 </ConsultButton>
+                 <div style={{ marginBottom: '2rem', fontSize: '1.2rem', color: '#cbd5e1' }}>Not sure where to start? We'll guide you.</div>
+                 <div className="hero-cta-group">
+                   <ConsultButton onSelectContact={onContact} className="btn btn-teal" style={{ padding: '1rem 2rem', fontSize: '1rem' }}>
+                     Book a consultation
+                   </ConsultButton>
+                 </div>
                </div>
             </div>
+          </div>
 
-          </motion.div>
-
-        </div>
+        </motion.div>
       </section>
     </motion.div>
   );

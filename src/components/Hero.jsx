@@ -14,10 +14,10 @@ const Hero = ({ onNavigate, onContact }) => {
         paddingTop: '80px',
         background: 'white'
       }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem', alignItems: 'center' }}>
+        <div className="container hero-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem', alignItems: 'center' }}>
 
           {/* Left Text Content */}
-          <div style={{ zIndex: 10, padding: '4rem 0' }}>
+          <div className="hero-content" style={{ zIndex: 10, padding: '4rem 0' }}>
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -40,6 +40,7 @@ const Hero = ({ onNavigate, onContact }) => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
+              className="hero-cta-group"
               style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center', marginBottom: '1.5rem' }}
             >
               <ConsultButton onSelectContact={onContact} className="btn btn-teal">
@@ -67,6 +68,7 @@ const Hero = ({ onNavigate, onContact }) => {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
+            className="hero-image-container"
             style={{
               height: '100%',
               position: 'absolute',
@@ -76,7 +78,7 @@ const Hero = ({ onNavigate, onContact }) => {
               backgroundImage: 'url(/hero.png)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              borderBottomLeftRadius: '100px' // giving a slight curved aesthetic matching prototype potentially
+              borderBottomLeftRadius: '100px'
             }}
           >
             {/* The image spans the right half full bleed with a graphic overlay if we wanted */}
@@ -88,7 +90,7 @@ const Hero = ({ onNavigate, onContact }) => {
 
       {/* Credibility Strip */}
       <div style={{ background: 'var(--color-primary-dark)', padding: '1.5rem 0', color: 'white' }}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', fontSize: '1.1rem', fontWeight: 500 }}>
+        <div className="container credibility-strip" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', fontSize: '1.1rem', fontWeight: 500 }}>
           <ShieldCheck size={24} color="var(--color-border)" style={{ opacity: 0.8 }} />
           Attorney-led legal support for SMEs across South Africa
           <Truck size={24} color="var(--color-border)" style={{ opacity: 0.8, marginLeft: '1rem' }} />

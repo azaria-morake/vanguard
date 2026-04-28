@@ -32,7 +32,7 @@ const HowItWorks = () => {
           <h2 style={{ fontSize: '2rem', color: 'var(--color-primary)' }}>How It Works</h2>
         </div>
         
-        <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', position: 'relative', maxWidth: '800px', margin: '0 auto' }}>
+        <div className="how-steps-container" style={{ display: 'flex', gap: '2rem', justifyContent: 'center', position: 'relative', maxWidth: '800px', margin: '0 auto' }}>
           {/* Connecting Line */}
           <div style={{ 
             position: 'absolute', top: '25px', left: '15%', right: '15%', height: '1px', 

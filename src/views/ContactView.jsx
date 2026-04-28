@@ -12,9 +12,9 @@ const ContactView = ({ onContact }) => {
       style={{ minHeight: '80vh', paddingBottom: '6rem' }}
     >
       <section style={{ position: 'relative', display: 'flex', alignItems: 'center', background: 'white' }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem', alignItems: 'center', padding: '6rem 0' }}>
+        <div className="container hero-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem', alignItems: 'center', padding: '6rem 0' }}>
           
-          <div style={{ zIndex: 10 }}>
+          <div className="hero-content" style={{ zIndex: 10 }}>
             <motion.h1 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -23,6 +23,7 @@ const ContactView = ({ onContact }) => {
             >
               Let’s discuss your legal needs
             </motion.h1>
+
             <motion.p 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -69,6 +70,7 @@ const ContactView = ({ onContact }) => {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
+            className="hero-image-container"
             style={{ 
               height: '100%', 
               position: 'absolute', 
