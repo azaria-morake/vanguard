@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { AlignRight, X } from 'lucide-react'
 
 // Components
 import Hero from './components/Hero.jsx'
@@ -109,42 +109,94 @@ function App() {
             <button 
               className="show-on-mobile" 
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              style={{ padding: '0.5rem', color: 'var(--color-primary)' }}
+              style={{ padding: '0.5rem', color: 'var(--color-primary)', zIndex: 101 }}
             >
-              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+              {isMenuOpen ? <X size={28} /> : <AlignRight size={28} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu Overlay */}
+        {/* Mobile Menu Overlay & Drawer */}
         <AnimatePresence>
           {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              style={{ 
-                background: 'white', 
-                borderTop: '1px solid var(--color-border)',
-                overflow: 'hidden',
-                display: 'flex',
-                flexDirection: 'column',
-                padding: '1rem 0'
-              }}
-              className="show-on-mobile"
-            >
-              <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <button onClick={() => navigateTo('home')} style={{ textAlign: 'left', padding: '0.75rem 0', borderBottom: '1px solid #f8f9fa', color: activeView === 'home' ? 'var(--color-secondary)' : 'var(--color-text)', fontWeight: 600 }}>Home</button>
-                <button onClick={() => navigateTo('about')} style={{ textAlign: 'left', padding: '0.75rem 0', borderBottom: '1px solid #f8f9fa', color: activeView === 'about' ? 'var(--color-secondary)' : 'var(--color-text)', fontWeight: 500 }}>About</button>
-                <button onClick={() => navigateTo('services')} style={{ textAlign: 'left', padding: '0.75rem 0', borderBottom: '1px solid #f8f9fa', color: activeView === 'services' ? 'var(--color-secondary)' : 'var(--color-text)', fontWeight: 500 }}>Services</button>
-                <button onClick={() => navigateTo('contact')} style={{ textAlign: 'left', padding: '0.75rem 0', borderBottom: '1px solid #f8f9fa', color: activeView === 'contact' ? 'var(--color-secondary)' : 'var(--color-text)', fontWeight: 500 }}>Contact</button>
-                
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
-                   <ConsultButton onSelectContact={(type) => { setContactModal(type); setIsMenuOpen(false); }} className="btn btn-primary" style={{ width: '100%' }}>Book Consultation</ConsultButton>
-                   <button onClick={() => { setContactModal('whatsapp'); setIsMenuOpen(false); }} className="btn btn-teal" style={{ width: '100%' }}>WhatsApp Us</button>
+            <>
+              {/* Semi-transparent Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setIsMenuOpen(false)}
+                style={{
+                  position: 'fixed',
+                  inset: 0,
+                  background: 'rgba(15, 23, 42, 0.4)',
+                  backdropFilter: 'blur(4px)',
+                  zIndex: 99
+                }}
+              />
+
+              {/* Slide-out Drawer */}
+              <motion.div
+                initial={{ x: '100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '100%' }}
+                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                style={{ 
+                  position: 'fixed',
+                  top: 0,
+                  right: 0,
+                  bottom: 0,
+                  width: '75%',
+                  background: 'white', 
+                  boxShadow: '-10px 0 30px rgba(0,0,0,0.1)',
+                  zIndex: 100,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  padding: '5rem 1.5rem 2rem 1.5rem',
+                  overflowY: 'auto'
+                }}
+              >
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  {navItems.map((item) => (
+                    <button 
+                      key={item.id}
+                      onClick={() => navigateTo(item.id)} 
+                      style={{ 
+                        textAlign: 'left', 
+                        padding: '1rem', 
+                        borderRadius: 'var(--radius-md)',
+                        border: '1px solid var(--color-border)',
+                        color: activeView === item.id ? 'var(--color-primary)' : 'var(--color-text)', 
+                        fontWeight: activeView === item.id ? 700 : 500,
+                        fontSize: '1.1rem',
+                        background: activeView === item.id ? 'rgba(13, 148, 136, 0.05)' : 'transparent',
+                        borderColor: activeView === item.id ? 'var(--color-secondary)' : 'var(--color-border)',
+                        transition: 'all 0.2s'
+                      }}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                  
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '2rem', borderTop: '1px solid var(--color-border)', paddingTop: '2rem' }}>
+                     <ConsultButton 
+                        onSelectContact={(type) => { setContactModal(type); setIsMenuOpen(false); }} 
+                        className="btn btn-primary" 
+                        style={{ width: '100%', padding: '1rem' }}
+                      >
+                        Book Consultation
+                      </ConsultButton>
+                     <button 
+                        onClick={() => { setContactModal('whatsapp'); setIsMenuOpen(false); }} 
+                        className="btn btn-teal" 
+                        style={{ width: '100%', padding: '1rem' }}
+                      >
+                        WhatsApp Us
+                      </button>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </header>
