@@ -12,8 +12,8 @@ const AboutView = ({ onNavigate, onContact }) => {
       style={{ minHeight: '80vh', paddingBottom: '6rem' }}
     >
       {/* Hero-style Section */}
-      <section style={{ position: 'relative', display: 'flex', alignItems: 'center', background: 'white', paddingTop: '100px' }}>
-        <div className="container hero-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem', alignItems: 'center', minHeight: '60vh' }}>
+      <section style={{ position: 'relative', display: 'flex', background: 'white', paddingTop: '100px' }}>
+        <div className="container hero-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem', minHeight: '60vh' }}>
           
           <div className="hero-content" style={{ zIndex: 10, padding: '2rem 0 4rem 0' }}>
             <motion.h1 

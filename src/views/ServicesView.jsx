@@ -41,8 +41,8 @@ const ServicesView = ({ onNavigate, onContact }) => {
       transition={{ duration: 0.4 }}
       style={{ minHeight: '80vh', paddingBottom: '6rem' }}
     >
-      <section style={{ position: 'relative', display: 'flex', alignItems: 'center', background: 'var(--color-primary-dark)', overflow: 'hidden' }}>
-        <div className="container hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center', minHeight: '40vh', padding: '4rem 0' }}>
+      <section style={{ position: 'relative', display: 'flex', background: 'var(--color-primary-dark)', overflow: 'hidden', paddingTop: '100px' }}>
+        <div className="container hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', minHeight: '40vh', padding: '2rem 0 4rem 0' }}>
 
           <div className="hero-content" style={{ zIndex: 10, textAlign: 'left', color: 'white' }}>
             <motion.h1

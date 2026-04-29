@@ -3,30 +3,30 @@ import { motion } from 'framer-motion';
 
 const AboutSection = () => {
   return (
-    <section className="about-section" style={{ 
-      position: 'relative', 
-      display: 'flex', 
-      alignItems: 'center', 
-      background: 'var(--color-primary)', 
-      color: 'white', 
+    <section className="about-section" style={{
+      position: 'relative',
+      display: 'flex',
+      alignItems: 'center',
+      background: 'var(--color-primary)',
+      color: 'white',
       overflow: 'hidden',
-      minHeight: '70vh' 
+      minHeight: '70vh'
     }}>
-      
+
       {/* Left Image Full Bleed */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
         className="about-image-container"
-        style={{ 
-          height: '100%', 
-          position: 'absolute', 
-          left: 0, 
-          top: 0, 
-          width: '50%', 
-          backgroundImage: 'url(/about.png)',
+        style={{
+          height: '100%',
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          width: '50%',
+          backgroundImage: 'url(/black-financial-consultant-explaining-deal-details.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           borderBottomRightRadius: '100px'
@@ -37,7 +37,7 @@ const AboutSection = () => {
       </motion.div>
 
       <div className="container about-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem', alignItems: 'center' }}>
-        
+
         {/* Empty left column to push content to the right */}
         <div className="hide-on-mobile"></div>
 
@@ -56,8 +56,8 @@ const AboutSection = () => {
             Practical legal expertise for growing businesses
           </h2>
           <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem', color: '#cbd5e1', lineHeight: 1.7 }}>
-            Vanguard Legal provides clear, business-focused legal and compliance support for SMEs. 
-            We don’t just quote the law — we help you apply it commercially so you can manage legal risk, 
+            Vanguard Legal provides clear, business-focused legal and compliance support for SMEs.
+            We don’t just quote the law — we help you apply it commercially so you can manage legal risk,
             stay compliant, strengthen contracts, and make confident business decisions.
           </p>
           <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '2rem' }}>
@@ -67,17 +67,17 @@ const AboutSection = () => {
               'Risk mitigation integrated into your workflow'
             ].map((item, i) => (
               <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem', fontSize: '1.05rem', color: '#f8fafc' }}>
-                <div style={{ 
-                  background: 'var(--color-secondary)', 
-                  width: '24px', 
-                  height: '24px', 
-                  borderRadius: '50%', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center', 
-                  color: 'white', 
+                <div style={{
+                  background: 'var(--color-secondary)',
+                  width: '24px',
+                  height: '24px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'white',
                   fontSize: '0.8rem',
-                  flexShrink: 0 
+                  flexShrink: 0
                 }}>
                   ✔
                 </div>

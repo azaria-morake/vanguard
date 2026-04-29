@@ -1,16 +1,23 @@
 /* Global Design Tokens & Reset */
 :root {
   /* Color Palette - Matching Prototype */
-  --color-primary: #0f172a; /* Slate 900 */
-  --color-primary-dark: #020617; /* Slate 950 */
-  --color-secondary: #0d9488; /* Teal 600 */
-  --color-secondary-light: #14b8a6; /* Teal 500 */
-  --color-bg: #f1f5f9; /* Slate 100 - Stronger separation */
+  --color-primary: #0f172a;
+  /* Slate 900 */
+  --color-primary-dark: #020617;
+  /* Slate 950 */
+  --color-secondary: #0d9488;
+  /* Teal 600 */
+  --color-secondary-light: #14b8a6;
+  /* Teal 500 */
+  --color-bg: #f1f5f9;
+  /* Slate 100 - Stronger separation */
   --color-surface: #ffffff;
-  --color-text: #334155; /* Slate 700 */
-  --color-text-header: #0f172a; /* Near black */
+  --color-text: #334155;
+  /* Slate 700 */
+  --color-text-header: #0f172a;
+  /* Near black */
   --color-border: #e2e8f0;
-  
+
   /* Typography */
   --font-family: 'Inter', sans-serif;
   --radius-sm: 8px;
@@ -37,7 +44,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   font-family: var(--font-family);
   background-color: var(--color-bg);
   color: var(--color-text);
@@ -48,7 +56,12 @@ html, body {
   width: 100%;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--color-text-header);
   font-weight: 700;
   line-height: 1.2;
@@ -101,7 +114,8 @@ button {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.8rem 1.75rem;
-  border-radius: var(--radius-sm); /* Using slight rounded corners like prototype instead of full */
+  border-radius: var(--radius-sm);
+  /* Using slight rounded corners like prototype instead of full */
   font-weight: 600;
   transition: all 0.2s ease;
   font-size: 0.95rem;
@@ -111,6 +125,7 @@ button {
   background: var(--color-primary);
   color: white;
 }
+
 .btn-primary:hover {
   background: var(--color-primary-dark);
 }
@@ -119,6 +134,7 @@ button {
   background: var(--color-secondary);
   color: white;
 }
+
 .btn-teal:hover {
   background: var(--color-secondary-light);
 }
@@ -128,8 +144,10 @@ button {
   color: var(--color-secondary);
   border: 1px solid var(--color-secondary);
 }
+
 .btn-teal-outline:hover {
-  background: rgba(13, 148, 136, 0.05); /* very light teal */
+  background: rgba(13, 148, 136, 0.05);
+  /* very light teal */
 }
 
 /* Animations */
@@ -138,8 +156,15 @@ button {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Mobile Responsiveness Utility Classes */
@@ -147,7 +172,7 @@ button {
   .hide-on-mobile {
     display: none !important;
   }
-  
+
   .show-on-mobile {
     display: block !important;
   }
@@ -160,9 +185,17 @@ button {
     padding: 3rem 0;
   }
 
-  h1 { font-size: 2.25rem !important; }
-  h2 { font-size: 1.75rem !important; }
-  h3 { font-size: 1.5rem !important; }
+  h1 {
+    font-size: 2.25rem !important;
+  }
+
+  h2 {
+    font-size: 1.75rem !important;
+  }
+
+  h3 {
+    font-size: 1.5rem !important;
+  }
 
   .hero-grid {
     display: flex !important;
@@ -171,7 +204,8 @@ button {
   }
 
   .hero-section {
-    padding-top: 80px !important; /* Sync with fixed header height */
+    padding-top: 80px !important;
+    /* Sync with fixed header height */
     overflow: hidden;
   }
 
@@ -183,16 +217,19 @@ button {
 
   .hero-content {
     padding: 2.5rem var(--spacing-6) !important;
-    text-align: left !important; /* Reverting to left as requested */
+    text-align: left !important;
+    /* Reverting to left as requested */
     display: flex !important;
     flex-direction: column !important;
-    align-items: flex-start !important; /* Left aligned text content */
+    align-items: flex-start !important;
+    /* Left aligned text content */
     width: 100% !important;
   }
 
   .hero-cta-group {
     width: 100% !important;
-    justify-content: center !important; /* Buttons stay centered as requested */
+    justify-content: center !important;
+    /* Buttons stay centered as requested */
     gap: 0.75rem !important;
     margin-right: 0 !important;
   }
@@ -204,7 +241,8 @@ button {
     margin-right: calc(-1 * var(--spacing-6)) !important;
     max-width: none !important;
     height: 320px !important;
-    margin-top: 0 !important; /* Flush with section top */
+    margin-top: 0 !important;
+    /* Flush with section top */
     border-radius: 0 !important;
     order: -1;
     background-size: cover !important;
@@ -240,7 +278,8 @@ button {
     height: 300px !important;
     margin-top: 0 !important;
     border-radius: 0 !important;
-    order: -1; /* Image first on mobile */
+    order: -1;
+    /* Image first on mobile */
     background-size: cover !important;
     background-position: center !important;
   }
@@ -250,7 +289,7 @@ button {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, var(--color-primary) 0%, rgba(15,23,42,0) 25%);
+    background: linear-gradient(to top, var(--color-primary) 0%, rgba(15, 23, 42, 0) 25%);
     pointer-events: none;
   }
 
@@ -262,10 +301,12 @@ button {
 
   .about-cta-image-container {
     position: relative !important;
-    width: 100% !important; /* Spans full width of its card */
+    width: 100% !important;
+    /* Spans full width of its card */
     height: 250px !important;
     margin-top: 0 !important;
-    border-radius: 0 !important; /* Docked to the top and sides of the card */
+    border-radius: 0 !important;
+    /* Docked to the top and sides of the card */
     background-size: cover !important;
     background-position: center !important;
   }
@@ -275,7 +316,7 @@ button {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, var(--color-primary) 0%, rgba(15,23,42,0) 25%);
+    background: linear-gradient(to top, var(--color-primary) 0%, rgba(15, 23, 42, 0) 25%);
     pointer-events: none;
   }
 
@@ -298,5 +339,36 @@ button {
 @media (min-width: 769px) {
   .show-on-mobile {
     display: none !important;
+  }
+}
+
+/* This class holds the base desktop styles */
+.vlegal-logo-responsive {
+  height: 3rem;
+  width: 220px;
+  margin-left: -1.5rem;
+  mask-image: url("/vlegal-transparent.png");
+  -webkit-mask-image: url("/vlegal-transparent.png");
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: center left;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+/* This media query overrides those styles on mobile */
+
+
+/* Swipeable Carousel System */
+@media (max-width: 768px) {
+  .vlegal-logo-responsive {
+    height: 2.2rem;
+    /* Smaller on mobile */
+    width: 140px;
+    /* Narrower container */
+    margin-left: -0.5rem;
+    /* Different offset */
   }
 }

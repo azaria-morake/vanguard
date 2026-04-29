@@ -10,14 +10,13 @@ const Hero = ({ onNavigate, onContact }) => {
         position: 'relative',
         minHeight: '80vh',
         display: 'flex',
-        alignItems: 'center',
-        paddingTop: '80px',
+        paddingTop: '100px',
         background: 'white'
       }}>
-        <div className="container hero-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem', alignItems: 'center' }}>
+        <div className="container hero-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem' }}>
 
           {/* Left Text Content */}
-          <div className="hero-content" style={{ zIndex: 10, padding: '4rem 0' }}>
+          <div className="hero-content" style={{ zIndex: 10, padding: '2rem 0 4rem 0' }}>
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -75,7 +74,7 @@ const Hero = ({ onNavigate, onContact }) => {
               right: 0,
               top: 0,
               width: '45%',
-              backgroundImage: 'url(/hero.png)',
+              backgroundImage: 'url(/hero.jpg)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               borderBottomLeftRadius: '100px'

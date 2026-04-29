@@ -7,7 +7,7 @@ const FinalCTA = ({ onNavigate, onContact }) => {
     <section className="section-padding" style={{
       background: 'var(--color-primary)',
       color: 'white',
-      backgroundImage: 'linear-gradient(to right, rgba(15,23,42,0.9), rgba(15,23,42,0.85)), url(/hero.png)', /* Reusing hero image for background as proxy */
+      backgroundImage: 'linear-gradient(to right, rgba(15,23,42,0.9), rgba(15,23,42,0.85)), url(/hero.jpg)', /* Reusing hero image for background as proxy */
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       textAlign: 'center'

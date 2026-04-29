@@ -30,8 +30,8 @@ const ContactView = ({ onContact }) => {
       transition={{ duration: 0.4 }}
       style={{ minHeight: '80vh', paddingBottom: '6rem' }}
     >
-      <section style={{ position: 'relative', display: 'flex', alignItems: 'center', background: 'white' }}>
-        <div className="container hero-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem', alignItems: 'center', padding: '6rem 0' }}>
+      <section style={{ position: 'relative', display: 'flex', background: 'white', paddingTop: '100px' }}>
+        <div className="container hero-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem', padding: '2rem 0 6rem 0' }}>
           
           <div className="hero-content" style={{ zIndex: 10, width: '100%' }}>
             <motion.h1 
