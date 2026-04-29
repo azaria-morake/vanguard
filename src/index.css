@@ -337,7 +337,9 @@ button {
 }
 
 @media (min-width: 769px) {
-  .show-on-mobile {
+
+  .show-on-mobile,
+  .mobile-only-layout {
     display: none !important;
   }
 }
@@ -362,13 +364,79 @@ button {
 
 
 /* Swipeable Carousel System */
+/* Mobile-Specific Features Carousel (Conditional Rendering) */
+.mobile-features-carousel {
+  display: flex !important;
+  overflow-x: auto !important;
+  scroll-snap-type: x mandatory !important;
+  -webkit-overflow-scrolling: touch;
+  gap: 0 !important;
+  /* Remove gap to prevent snap jitter */
+  padding: 1rem 0 !important;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mobile-features-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-square-card-wrapper {
+  flex: 0 0 100% !important;
+  /* Full width wrapper to simplify snapping */
+  scroll-snap-align: center !important;
+  scroll-snap-stop: always !important;
+  /* Force the snap point */
+  display: flex !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  /* CRITICAL: prevent card from shrinking */
+}
+
+.mobile-square-card {
+  width: 85% !important;
+  /* Actual card is 85% of viewport */
+  aspect-ratio: 1 / 1 !important;
+  background: white !important;
+  border: 1px solid var(--color-secondary) !important;
+  border-radius: 20px !important;
+  padding: 2.5rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  box-sizing: border-box !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05) !important;
+}
+
+.mobile-carousel-dots {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 0.75rem !important;
+  margin-top: 1rem !important;
+  width: 100% !important;
+}
+
+.mobile-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-border);
+  transition: all 0.3s ease;
+}
+
+.mobile-dot.active {
+  background: var(--color-secondary);
+  transform: scale(1.4);
+  box-shadow: 0 0 10px rgba(13, 148, 136, 0.4);
+}
+
 @media (max-width: 768px) {
   .vlegal-logo-responsive {
     height: 2.2rem;
-    /* Smaller on mobile */
     width: 140px;
-    /* Narrower container */
     margin-left: -0.5rem;
-    /* Different offset */
   }
 }
