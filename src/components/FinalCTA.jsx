@@ -10,7 +10,8 @@ const FinalCTA = ({ onNavigate, onContact }) => {
       backgroundImage: 'linear-gradient(to right, rgba(15,23,42,0.9), rgba(15,23,42,0.85)), url(/hero.jpg)', /* Reusing hero image for background as proxy */
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-      textAlign: 'center'
+      textAlign: 'center',
+      paddingBottom: 0
     }}>
       <div className="container" style={{ padding: '4rem var(--spacing-6)' }}>
         {/* <div style={{ fontSize: '0.9rem', marginBottom: '1rem', opacity: 0.8 }}>Final CTA</div> */}

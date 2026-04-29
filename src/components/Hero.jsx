@@ -6,11 +6,10 @@ import ConsultButton from './ConsultButton.jsx';
 const Hero = ({ onNavigate, onContact }) => {
   return (
     <>
-      <section style={{
+      <section className="hero-section-fix" style={{
         position: 'relative',
         minHeight: '80vh',
         display: 'flex',
-        paddingTop: '100px',
         background: 'white'
       }}>
         <div className="container hero-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem' }}>

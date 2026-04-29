@@ -9,14 +9,14 @@ const AboutView = ({ onNavigate, onContact }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
-      style={{ minHeight: '80vh', paddingBottom: '6rem' }}
+      style={{ minHeight: '80vh' }}
     >
       {/* Hero-style Section */}
-      <section style={{ position: 'relative', display: 'flex', background: 'white', paddingTop: '100px' }}>
+      <section className="hero-section-fix" style={{ position: 'relative', display: 'flex', background: 'white' }}>
         <div className="container hero-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem', minHeight: '60vh' }}>
-          
+
           <div className="hero-content" style={{ zIndex: 10, padding: '2rem 0 4rem 0' }}>
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -25,9 +25,9 @@ const AboutView = ({ onNavigate, onContact }) => {
             >
               Practical legal support built for SMEs
             </motion.h1>
-            
+
             <div className="hero-body-content">
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
@@ -35,7 +35,7 @@ const AboutView = ({ onNavigate, onContact }) => {
               >
                 Vanguard Legal exists to provide SMEs with clear, practical legal and compliance support that makes business sense.
               </motion.p>
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
@@ -45,33 +45,33 @@ const AboutView = ({ onNavigate, onContact }) => {
               </motion.p>
             </div>
           </div>
-          
+
           {/* Right Hero Image matching Home Hero Fade */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="hero-image-container"
-            style={{ 
-              height: '100%', 
-              position: 'absolute', 
-              right: 0, 
-              top: 0, 
-              width: '45%', 
-              backgroundImage: 'url(/about.png)',
+            style={{
+              height: '100%',
+              position: 'absolute',
+              right: 0,
+              top: 0,
+              width: '45%',
+              backgroundImage: 'url(/christina-wocintechchat-com-m-rg1y72eKw6o-unsplash.jpg)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               borderBottomLeftRadius: '100px'
             }}
           >
-             {/* Fade into white left side to blend perfectly */}
-             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, white 0%, rgba(255,255,255,0) 30%)' }}></div>
+            {/* Fade into white left side to blend perfectly */}
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, white 0%, rgba(255,255,255,0) 30%)' }}></div>
           </motion.div>
 
         </div>
       </section>
 
-      <section className="section-padding" style={{ background: 'var(--color-bg)' }}>
+      <section className="section-padding" style={{ background: 'var(--color-bg)', paddingBottom: 0 }}>
         <div className="container">
           <div className="responsive-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem' }}>
             <motion.div
@@ -107,18 +107,18 @@ const AboutView = ({ onNavigate, onContact }) => {
                 We focus on helping businesses get things right from the start — avoiding costly issues later.
               </p>
             </motion.div>
+          </div>
         </div>
-      </div>
 
-      {/* Full-width CTA Section */}
-        <motion.div 
+        {/* Full-width CTA Section */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="about-cta-container"
-          style={{ 
-            marginTop: '5rem', 
-            background: 'var(--color-primary)', 
+          style={{
+            marginTop: '5rem',
+            background: 'var(--color-primary)',
             position: 'relative',
             overflow: 'visible', // Changed to visible
             minHeight: '400px',
@@ -131,46 +131,46 @@ const AboutView = ({ onNavigate, onContact }) => {
           {/* Background Clipping Container */}
           <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
             {/* Desktop Image - Fixed width to prevent overlap */}
-            <div className="about-cta-image-container hide-on-mobile" style={{ 
-              position: 'absolute', 
-              left: 0, 
-              top: 0, 
-              width: '40%', 
-              height: '100%', 
-              backgroundImage: 'url(/team.png)', 
-              backgroundSize: 'cover', 
+            <div className="about-cta-image-container hide-on-mobile" style={{
+              position: 'absolute',
+              left: 0,
+              top: 0,
+              width: '40%',
+              height: '100%',
+              backgroundImage: 'url(/vitaly-gariev-h-v8A2ng0Oc-unsplash.jpg)',
+              backgroundSize: 'cover',
               backgroundPosition: 'center'
             }}>
-               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(15,23,42,0) 60%, var(--color-primary) 100%)' }}></div>
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(15,23,42,0) 60%, var(--color-primary) 100%)' }}></div>
             </div>
 
             {/* Mobile Image - Full width top background */}
-            <div className="about-cta-image-container show-on-mobile" style={{ 
-              position: 'relative', 
-              width: '100%', 
-              height: '250px', 
-              backgroundImage: 'url(/team.png)', 
-              backgroundSize: 'cover', 
+            <div className="about-cta-image-container show-on-mobile" style={{
+              position: 'relative',
+              width: '100%',
+              height: '250px',
+              backgroundImage: 'linear-gradient(to right, rgba(15,23,42,0.9), rgba(15,23,42,0.85)), url(/vitaly-gariev-h-v8A2ng0Oc-unsplash.jpg)',
+              backgroundSize: 'cover',
               backgroundPosition: 'center'
             }}>
-               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--color-primary) 0%, rgba(15,23,42,0) 50%)' }}></div>
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--color-primary) 0%, rgba(15,23,42,0) 50%)' }}></div>
             </div>
           </div>
-          
+
           {/* Content properly aligned to the grid container */}
           <div className="container" style={{ position: 'relative', zIndex: 10, width: '100%' }}>
             <div className="responsive-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '4rem' }}>
-               <div className="hide-on-mobile"></div> {/* Leaves left empty */}
-               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', padding: '4rem var(--spacing-6)' }}>
-                 <h3 style={{ fontSize: '2.2rem', color: 'white', marginBottom: '1.5rem', lineHeight: 1.2 }}>
-                   Work with a legal partner who understands your business
-                 </h3>
-                 <div className="hero-cta-group">
-                   <ConsultButton onSelectContact={onContact} className="btn btn-teal">
-                     Book a consultation
-                   </ConsultButton>
-                 </div>
-               </div>
+              <div className="hide-on-mobile"></div> {/* Leaves left empty */}
+              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', padding: '4rem var(--spacing-6)' }}>
+                <h3 style={{ fontSize: '2.2rem', color: 'white', marginBottom: '1.5rem', lineHeight: 1.2 }}>
+                  Work with a legal partner who understands your business
+                </h3>
+                <div className="hero-cta-group">
+                  <ConsultButton onSelectContact={onContact} className="btn btn-teal">
+                    Book a consultation
+                  </ConsultButton>
+                </div>
+              </div>
             </div>
           </div>
 

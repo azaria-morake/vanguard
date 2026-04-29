@@ -90,6 +90,10 @@ button {
   padding: 5rem 0;
 }
 
+.hero-section-fix {
+  padding-top: 100px;
+}
+
 /* Component Overrides matching Prototype */
 .flat-card {
   background: white;
@@ -203,8 +207,12 @@ button {
     gap: 2rem !important;
   }
 
+  .hero-section-fix {
+    padding-top: 72px !important;
+  }
+
   .hero-section {
-    padding-top: 80px !important;
+    padding-top: 72px !important;
     /* Sync with fixed header height */
     overflow: hidden;
   }
@@ -236,7 +244,7 @@ button {
 
   .hero-image-container {
     position: relative !important;
-    width: 100vw !important;
+    width: calc(100% + (var(--spacing-6) * 2)) !important;
     margin-left: calc(-1 * var(--spacing-6)) !important;
     margin-right: calc(-1 * var(--spacing-6)) !important;
     max-width: none !important;
