@@ -14,11 +14,12 @@ const ServiceCategory = ({ title, desc, includes, delay, isMobile }) => (
       padding: '2.5rem',
       display: 'flex',
       flexDirection: 'column',
-      width: isMobile ? '95%' : 'auto',
-      margin: isMobile ? '0 auto' : '0', // Forces separation in the wrapper
+      width: isMobile ? '95%' : '350px',
+      margin: isMobile ? '0 auto' : '0 1rem',
       boxSizing: 'border-box',
-      flex: 'none',
-      minHeight: isMobile ? '380px' : 'auto' // Gives breathing room for the bottom list
+      flexShrink: 0,
+      height: '100%',
+      minHeight: isMobile ? '380px' : '450px'
     }}
   >
     <h3 style={{ fontSize: '1.4rem', color: 'var(--color-primary)', marginBottom: '0.75rem' }}>{title}</h3>
@@ -35,7 +36,7 @@ const ServiceCategory = ({ title, desc, includes, delay, isMobile }) => (
   </motion.div>
 );
 
-const ServicesView = ({ onNavigate, onContact }) => {
+const ServicesView = ({ onNavigate, onContact, isMobile }) => {
   const [activeIdx, setActiveIdx] = useState(0);
   const scrollRef = useRef(null);
 
@@ -48,11 +49,16 @@ const ServicesView = ({ onNavigate, onContact }) => {
 
   const handleScroll = () => {
     if (!scrollRef.current) return;
-    const scrollPosition = scrollRef.current.scrollLeft;
-    const cardWidth = scrollRef.current.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
+    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+    const maxScroll = scrollWidth - clientWidth;
+    
+    if (maxScroll <= 0) return;
 
-    if (newIndex !== activeIdx) {
+    // Map the scroll progress (0-1) to the number of dots (0 to services.length - 1)
+    const progress = scrollLeft / maxScroll;
+    const newIndex = Math.round(progress * (services.length - 1));
+
+    if (newIndex !== activeIdx && newIndex >= 0 && newIndex < services.length) {
       setActiveIdx(newIndex);
     }
   };
@@ -105,30 +111,41 @@ const ServicesView = ({ onNavigate, onContact }) => {
       <section className="section-padding" style={{ background: 'var(--color-bg)', paddingBottom: 0 }}>
         <div className="container">
 
-          {/* --- DESKTOP LAYOUT --- */}
-          <div className="hide-on-mobile responsive-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginBottom: '5rem' }}>
-            {services.map((svc, i) => <ServiceCategory key={i} {...svc} delay={0.1 * i} />)}
-          </div>
-
-          {/* --- MOBILE LAYOUT --- */}
-          <div className="mobile-only-layout" style={{ width: '100%', marginBottom: '5rem' }}>
-            <div ref={scrollRef} onScroll={handleScroll} className="mobile-features-carousel">
+          {/* --- UNIFIED CAROUSEL (Desktop & Mobile) --- */}
+          <div style={{ width: '100%', marginBottom: '5rem' }}>
+            <div 
+              ref={scrollRef} 
+              onScroll={handleScroll} 
+              className="mobile-features-carousel"
+              style={{
+                padding: '1rem 0',
+                gap: '0',
+                alignItems: 'stretch',
+                display: 'flex'
+              }}
+            >
               {services.map((svc, i) => (
-                <div key={i} className="mobile-square-card-wrapper">
-                  <ServiceCategory {...svc} isMobile={true} delay={0} />
+                <div key={i} className={isMobile ? "mobile-square-card-wrapper" : ""} style={!isMobile ? { flex: '0 0 auto', scrollSnapAlign: 'center', display: 'flex' } : { display: 'flex' }}>
+                  <ServiceCategory {...svc} isMobile={isMobile} delay={0} />
                 </div>
               ))}
             </div>
 
-            <div className="mobile-carousel-dots">
+            <div className="mobile-carousel-dots" style={{ marginTop: '5rem', paddingBottom: '3rem' }}>
               {services.map((_, idx) => (
                 <div
                   key={idx}
                   className={`mobile-dot ${activeIdx === idx ? 'active' : ''}`}
                   onClick={() => {
                     if (scrollRef.current) {
-                      const target = scrollRef.current.children[idx];
-                      target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                      const { scrollWidth, clientWidth } = scrollRef.current;
+                      const maxScroll = scrollWidth - clientWidth;
+                      const targetScroll = (idx / (services.length - 1)) * maxScroll;
+                      
+                      scrollRef.current.scrollTo({
+                        left: targetScroll,
+                        behavior: 'smooth'
+                      });
                     }
                   }}
                 />

@@ -308,7 +308,7 @@ function App() {
                         border: activeView === item.id ? '1px solid rgba(13, 148, 136, 0.3)' : '1px solid rgba(255, 255, 255, 0.05)'
                       }}
                     >
-                        {item.label}
+                      {item.label}
                       {activeView === item.id && (
                         <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--color-secondary-light)' }} />
                       )}
@@ -355,7 +355,7 @@ function App() {
                   >
                     <div>
                       <div style={{ fontSize: '0.7rem', opacity: 0.5, textTransform: 'uppercase', letterSpacing: '0.1rem', marginBottom: '0.3rem' }}>Get in touch</div>
-                      <a href="mailto:info@vanguardlegal.co.za" style={{ fontSize: '0.9rem', color: 'white', opacity: 0.8 }}>info@vanguardlegal.co.za</a>
+                      <a href="mailto:contact@vanguardlegal.co.za" style={{ fontSize: '0.9rem', color: 'white', opacity: 0.8 }}>contact@vanguardlegal.co.za</a>
                     </div>
 
                     <div style={{ display: 'flex', gap: '1.25rem' }}>
@@ -400,7 +400,7 @@ function App() {
           )}
 
           {activeView === 'about' && <AboutView key="about" onNavigate={navigateTo} onContact={setContactModal} />}
-          {activeView === 'services' && <ServicesView key="services" onNavigate={navigateTo} onContact={setContactModal} />}
+          {activeView === 'services' && <ServicesView key="services" onNavigate={navigateTo} onContact={setContactModal} isMobile={isMobile} />}
           {activeView === 'contact' && <ContactView key="contact" onContact={setContactModal} />}
         </AnimatePresence>
       </main>

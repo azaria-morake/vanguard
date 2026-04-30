@@ -52,11 +52,21 @@ const ContactView = ({ onContact }) => {
             </motion.p>
 
             <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem', color: 'var(--color-primary)', opacity: 0.8 }}
+            >
+              <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--color-secondary)' }}></div>
+              <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>We're based in Sandton, Johannesburg</span>
+            </motion.div>
+
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               className="flat-card"
-              style={{ padding: '2.5rem', width: '100%', maxWidth: '600px' }}
+              style={{ padding: '2.5rem', width: '100%', maxWidth: '600px', border: '1px solid var(--color-secondary)' }}
             >
               <form style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }} onSubmit={handleWhatsAppSubmit}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>

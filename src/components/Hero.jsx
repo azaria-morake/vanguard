@@ -88,10 +88,18 @@ const Hero = ({ onNavigate, onContact }) => {
 
       {/* Credibility Strip */}
       <div style={{ background: 'var(--color-primary-dark)', padding: '1.5rem 0', color: 'white' }}>
-        <div className="container credibility-strip" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', fontSize: '1.1rem', fontWeight: 500 }}>
-          <ShieldCheck size={24} color="var(--color-border)" style={{ opacity: 0.8 }} />
-          Attorney-led legal support for SMEs across South Africa
-          <Truck size={24} color="var(--color-border)" style={{ opacity: 0.8, marginLeft: '1rem' }} />
+        <div className="container credibility-strip" style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'center', 
+          gap: '1rem', 
+          fontSize: '1.1rem', 
+          fontWeight: 500,
+          textAlign: 'center'
+        }}>
+          <ShieldCheck size={24} color="var(--color-border)" style={{ opacity: 0.8, flexShrink: 0 }} />
+          <span>Attorney-led legal support for SMEs across South Africa</span>
+          <Truck size={24} color="var(--color-border)" style={{ opacity: 0.8, flexShrink: 0 }} />
         </div>
       </div>
     </>

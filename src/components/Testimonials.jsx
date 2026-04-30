@@ -77,6 +77,9 @@ const Testimonials = () => {
               <TestimonialCard key={idx} {...t} delay={0.1 * idx} />
             ))}
           </div>
+          <div style={{ fontSize: '0.8rem', color: 'var(--color-text)', opacity: 0.6, marginTop: '1rem' }}>
+            *Client details withheld for confidentiality.
+          </div>
         </div>
 
         {/* --- MOBILE LAYOUT --- */}
@@ -104,6 +107,9 @@ const Testimonials = () => {
                 }}
               />
             ))}
+          </div>
+          <div style={{ fontSize: '0.75rem', color: 'var(--color-text)', opacity: 0.6, marginTop: '2rem', textAlign: 'center' }}>
+            *Client details withheld for confidentiality.
           </div>
         </div>
 
