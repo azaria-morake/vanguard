@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, Mail } from 'lucide-react';
 
-const ConsultButton = ({ onSelectContact, children, className, style }) => {
+const ConsultButton = ({ onSelectContact, children, className, style, direction = 'down' }) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
 
@@ -16,8 +16,17 @@ const ConsultButton = ({ onSelectContact, children, className, style }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const isUp = direction === 'up';
+
   return (
-    <div style={{ position: 'relative', display: 'inline-block' }} ref={containerRef}>
+    <div 
+      style={{ 
+        position: 'relative', 
+        display: 'inline-block',
+        zIndex: isOpen ? 100 : 1
+      }} 
+      ref={containerRef}
+    >
       <button 
         className={className || "btn btn-teal"} 
         style={style}
@@ -29,16 +38,18 @@ const ConsultButton = ({ onSelectContact, children, className, style }) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            initial={{ opacity: 0, y: isUp ? -10 : 10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+            exit={{ opacity: 0, y: isUp ? -10 : 10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
             style={{
               position: 'absolute',
-              top: '100%',
+              top: isUp ? 'auto' : '100%',
+              bottom: isUp ? '100%' : 'auto',
               left: 0,
               right: 0,
-              marginTop: '0.75rem',
+              marginTop: isUp ? '0' : '0.75rem',
+              marginBottom: isUp ? '0.75rem' : '0',
               background: 'white',
               borderRadius: 'var(--radius-lg)',
               border: '1px solid var(--color-secondary)',

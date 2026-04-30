@@ -206,7 +206,7 @@ const ServicesView = ({ onNavigate, onContact }) => {
                 </ul>
                 <div style={{ marginBottom: '2rem', fontSize: '1.2rem', color: '#cbd5e1' }}>Not sure where to start? We'll guide you.</div>
                 <div className="hero-cta-group">
-                  <ConsultButton onSelectContact={onContact} className="btn btn-teal" style={{ padding: '1rem 2rem', fontSize: '1rem' }}>
+                  <ConsultButton onSelectContact={onContact} className="btn btn-teal" direction="up" style={{ padding: '1rem 2rem', fontSize: '1rem' }}>
                     Book a consultation
                   </ConsultButton>
                 </div>

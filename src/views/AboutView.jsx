@@ -166,7 +166,7 @@ const AboutView = ({ onNavigate, onContact }) => {
                   Work with a legal partner who understands your business
                 </h3>
                 <div className="hero-cta-group">
-                  <ConsultButton onSelectContact={onContact} className="btn btn-teal">
+                  <ConsultButton onSelectContact={onContact} className="btn btn-teal" direction="up">
                     Book a consultation
                   </ConsultButton>
                 </div>

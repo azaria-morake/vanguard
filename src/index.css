@@ -448,3 +448,38 @@ button {
     margin-left: -0.5rem;
   }
 }
+
+/* Premium Scrollbar Styling */
+.legal-content-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.legal-content-scroll::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 10px 0; /* Keeps the thumb away from the rounded corners */
+}
+
+.legal-content-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+.legal-content-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--color-secondary);
+}
+
+/* Hide scrollbars for mobile menu and other clean areas */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Firefox Support */
+.legal-content-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}

@@ -19,7 +19,7 @@ const ContactView = ({ onContact }) => {
     const { name, email, message } = formData;
     const text = `Hello! I'm ${name}.${email ? ` My email is ${email}.` : ''} I'm interested in: ${message}`;
     const encodedText = encodeURIComponent(text);
-    window.open(`https://wa.me/27123456789?text=${encodedText}`, '_blank');
+    window.open(`https://wa.me/27788334236?text=${encodedText}`, '_blank');
   };
 
   return (

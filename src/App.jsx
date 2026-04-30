@@ -13,6 +13,7 @@ import Footer from './components/Footer.jsx'
 import ConsultButton from './components/ConsultButton.jsx'
 import WhatsAppModal from './components/WhatsAppModal.jsx'
 import EmailModal from './components/EmailModal.jsx'
+import LegalModal from './components/LegalModal.jsx'
 
 // Views
 import AboutView from './views/AboutView.jsx'
@@ -26,8 +27,31 @@ function App() {
     return hash || 'home';
   });
   const [contactModal, setContactModal] = useState(null) // null, 'whatsapp', 'email'
+  const [legalModal, setLegalModal] = useState(null) // null, 'privacy', 'terms'
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hoveredView, setHoveredView] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Lock body scroll when menu or legal modal is open
+  useEffect(() => {
+    if (isMenuOpen || !!legalModal) {
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen, legalModal]);
 
   const navigateTo = (view) => {
     setActiveView(view);
@@ -147,9 +171,21 @@ function App() {
           <button
             className="show-on-mobile"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            style={{ padding: '0.5rem', color: 'var(--color-primary)', zIndex: 101 }}
+            style={{
+              width: '48px',
+              height: '48px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: '50%',
+              background: isMenuOpen ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
+              color: isMenuOpen ? 'white' : 'var(--color-primary)',
+              zIndex: 101,
+              transition: 'all 0.3s',
+              border: isMenuOpen ? '1px solid rgba(255, 255, 255, 0.1)' : 'none'
+            }}
           >
-            {isMenuOpen ? <X size={28} /> : <AlignRight size={28} />}
+            {isMenuOpen ? <X size={24} strokeWidth={3} /> : <AlignRight size={28} />}
           </button>
         </div>
 
@@ -165,8 +201,8 @@ function App() {
                 style={{
                   position: 'fixed',
                   inset: 0,
-                  background: 'rgba(15, 23, 42, 0.4)',
-                  backdropFilter: 'blur(4px)',
+                  background: 'rgba(2, 6, 23, 0.6)',
+                  backdropFilter: 'blur(8px)',
                   zIndex: 99
                 }}
               />
@@ -176,60 +212,167 @@ function App() {
                 animate={{ x: 0 }}
                 exit={{ x: '100%' }}
                 transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                className="no-scrollbar"
                 style={{
                   position: 'fixed',
-                  top: 0,
-                  right: 0,
-                  bottom: 0,
-                  width: '75%',
-                  background: 'white',
-                  boxShadow: '-10px 0 30px rgba(0,0,0,0.1)',
+                  top: '1rem',
+                  right: '1rem',
+                  bottom: '1rem',
+                  width: 'calc(100% - 2rem)',
+                  maxWidth: '380px',
+                  background: 'rgba(15, 23, 42, 0.98)',
+                  backdropFilter: 'blur(20px)',
+                  boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
                   zIndex: 100,
                   display: 'flex',
                   flexDirection: 'column',
-                  padding: '5rem 1.5rem 2rem 1.5rem',
-                  overflowY: 'auto'
+                  padding: isMobile ? '3rem 1.5rem 1.5rem 1.5rem' : '4rem 2rem 2rem 2rem',
+                  color: 'white',
+                  overflowX: 'hidden',
+                  overflowY: 'auto',
+                  borderRadius: '32px',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  scrollbarWidth: 'none',
+                  msOverflowStyle: 'none'
                 }}
               >
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  {navItems.map((item) => (
-                    <button
+                {/* Decorative background element */}
+                <div style={{
+                  position: 'absolute',
+                  top: '-10%',
+                  right: '-10%',
+                  width: '300px',
+                  height: '300px',
+                  background: 'radial-gradient(circle, rgba(13, 148, 136, 0.2) 0%, transparent 70%)',
+                  pointerEvents: 'none'
+                }} />
+
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0 },
+                    show: {
+                      opacity: 1,
+                      transition: { staggerChildren: 0.08, delayChildren: 0.2 }
+                    }
+                  }}
+                  initial="hidden"
+                  animate="show"
+                  style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', position: 'relative', zIndex: 1 }}
+                >
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    marginBottom: '1.5rem',
+                    padding: '0 1rem',
+                    borderBottom: '1px solid rgba(255,255,255,0.05)',
+                    paddingBottom: '1.25rem'
+                  }}>
+                    <div
+                      className="vlegal-logo-responsive"
+                      style={{
+                        backgroundColor: 'white',
+                        height: '1.4rem',
+                        width: '100px',
+                        minWidth: '100px',
+                        marginLeft: '-0.5rem',
+                        opacity: 0.9
+                      }}
+                    />
+                    <div style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.2rem', color: 'var(--color-secondary)', textTransform: 'uppercase', opacity: 0.8 }}>
+                      Menu
+                    </div>
+                  </div>
+
+                  {navItems.map((item, index) => (
+                    <motion.button
                       key={item.id}
+                      variants={{
+                        hidden: { opacity: 0, x: 30 },
+                        show: { opacity: 1, x: 0 }
+                      }}
                       onClick={() => navigateTo(item.id)}
                       style={{
                         textAlign: 'left',
-                        padding: '1rem',
-                        borderRadius: 'var(--radius-md)',
-                        border: '1px solid var(--color-border)',
-                        color: activeView === item.id ? 'var(--color-primary)' : 'var(--color-text)',
+                        padding: '1rem 1.5rem',
+                        background: activeView === item.id ? 'rgba(13, 148, 136, 0.15)' : 'rgba(255, 255, 255, 0.03)',
+                        borderRadius: '20px',
+                        color: activeView === item.id ? 'var(--color-secondary-light)' : 'white',
                         fontWeight: activeView === item.id ? 700 : 500,
-                        fontSize: '1.1rem',
-                        background: activeView === item.id ? 'rgba(13, 148, 136, 0.05)' : 'transparent',
-                        borderColor: activeView === item.id ? 'var(--color-secondary)' : 'var(--color-border)',
-                        transition: 'all 0.2s'
+                        fontSize: '1.4rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: '1rem',
+                        transition: 'all 0.3s',
+                        border: activeView === item.id ? '1px solid rgba(13, 148, 136, 0.3)' : '1px solid rgba(255, 255, 255, 0.05)'
                       }}
                     >
-                      {item.label}
-                    </button>
+                        {item.label}
+                      {activeView === item.id && (
+                        <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--color-secondary-light)' }} />
+                      )}
+                    </motion.button>
                   ))}
 
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '2rem', borderTop: '1px solid var(--color-border)', paddingTop: '2rem' }}>
+                  <motion.div
+                    variants={{
+                      hidden: { opacity: 0, y: 20 },
+                      show: { opacity: 1, y: 0 }
+                    }}
+                    style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}
+                  >
                     <ConsultButton
                       onSelectContact={(type) => { setContactModal(type); setIsMenuOpen(false); }}
-                      className="btn btn-primary"
-                      style={{ width: '100%', padding: '1rem' }}
+                      className="btn btn-teal"
+                      style={{ width: '100%', padding: '1.1rem', fontSize: '1rem' }}
                     >
                       Book Consultation
                     </ConsultButton>
                     <button
                       onClick={() => { setContactModal('whatsapp'); setIsMenuOpen(false); }}
-                      className="btn btn-teal"
-                      style={{ width: '100%', padding: '1rem' }}
+                      className="btn btn-teal-outline"
+                      style={{ width: '100%', padding: '1.1rem', fontSize: '1rem', borderColor: 'rgba(20, 184, 166, 0.3)', color: 'white' }}
                     >
                       WhatsApp Us
                     </button>
-                  </div>
-                </div>
+                  </motion.div>
+
+                  <motion.div
+                    variants={{
+                      hidden: { opacity: 0 },
+                      show: { opacity: 1 }
+                    }}
+                    style={{
+                      marginTop: '2rem',
+                      paddingTop: '1.5rem',
+                      borderTop: '1px solid rgba(255,255,255,0.1)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: isMobile ? '1rem' : '1.25rem',
+                      paddingBottom: isMobile ? '1rem' : '0'
+                    }}
+                  >
+                    <div>
+                      <div style={{ fontSize: '0.7rem', opacity: 0.5, textTransform: 'uppercase', letterSpacing: '0.1rem', marginBottom: '0.3rem' }}>Get in touch</div>
+                      <a href="mailto:info@vanguardlegal.co.za" style={{ fontSize: '0.9rem', color: 'white', opacity: 0.8 }}>info@vanguardlegal.co.za</a>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '1.25rem' }}>
+                      {[
+                        { name: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61575264892574', path: "M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" },
+                        { name: 'Instagram', href: 'https://www.instagram.com/vanguardlegalsa/', path: "M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" },
+                        { name: 'LinkedIn', href: 'https://www.linkedin.com/company/vanguard-legal-sa', path: "M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" }
+                      ].map((social, idx) => (
+                        <a key={idx} href={social.href} target="_blank" rel="noopener noreferrer" style={{ color: 'white', opacity: 0.6 }}>
+                          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                            <path d={social.path} />
+                          </svg>
+                        </a>
+                      ))}
+                    </div>
+                  </motion.div>
+                </motion.div>
               </motion.div>
             </>
           )}
@@ -237,7 +380,7 @@ function App() {
       </header>
 
       {/* Main Content Area */}
-      <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 1 }}>
         <AnimatePresence mode="wait">
           {activeView === 'home' && (
             <motion.div
@@ -262,10 +405,11 @@ function App() {
         </AnimatePresence>
       </main>
 
-      <Footer onNavigate={navigateTo} onContact={setContactModal} />
+      <Footer onNavigate={navigateTo} onContact={setContactModal} onLegal={setLegalModal} />
 
       <WhatsAppModal isOpen={contactModal === 'whatsapp'} onClose={() => setContactModal(null)} />
       <EmailModal isOpen={contactModal === 'email'} onClose={() => setContactModal(null)} />
+      <LegalModal isOpen={!!legalModal} type={legalModal} onClose={() => setLegalModal(null)} />
     </div>
   )
 }

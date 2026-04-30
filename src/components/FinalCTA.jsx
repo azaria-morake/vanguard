@@ -33,7 +33,7 @@ const FinalCTA = ({ onNavigate, onContact }) => {
           className="hero-cta-group"
           style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}
         >
-          <ConsultButton onSelectContact={onContact} className="btn btn-teal">
+          <ConsultButton onSelectContact={onContact} className="btn btn-teal" direction="up">
             Book a Consultation
           </ConsultButton>
           <button onClick={() => onContact('whatsapp')} className="btn btn-teal-outline" style={{ border: '1px solid rgba(255,255,255,0.4)', color: 'white' }}>

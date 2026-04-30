@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
-const Footer = ({ onNavigate, onContact }) => {
+const Footer = ({ onNavigate, onContact, onLegal }) => {
   const [hoveredLink, setHoveredLink] = useState(null);
 
   const scrollToTop = () => {
@@ -22,7 +22,13 @@ const Footer = ({ onNavigate, onContact }) => {
       links: [
         { id: 'contact', label: 'Contact Us', type: 'nav' },
         { id: 'whatsapp', label: 'WhatsApp Us', type: 'contact' },
-
+      ]
+    },
+    {
+      title: 'Legal',
+      links: [
+        { id: 'privacy', label: 'Privacy Policy', type: 'legal' },
+        { id: 'terms', label: 'Terms & Conditions', type: 'legal' },
       ]
     }
   ];
@@ -131,7 +137,11 @@ const Footer = ({ onNavigate, onContact }) => {
                     key={link.id}
                     onMouseEnter={() => setHoveredLink(link.id)}
                     onMouseLeave={() => setHoveredLink(null)}
-                    onClick={() => link.type === 'nav' ? onNavigate(link.id) : link.type === 'contact' ? onContact(link.id) : null}
+                    onClick={() => {
+                      if (link.type === 'nav') onNavigate(link.id);
+                      else if (link.type === 'contact') onContact(link.id);
+                      else if (link.type === 'legal') onLegal(link.id);
+                    }}
                     style={{
                       color: hoveredLink === link.id ? 'white' : 'inherit',
                       textAlign: 'left',
