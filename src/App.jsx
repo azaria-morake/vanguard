@@ -412,7 +412,7 @@ function App() {
         </AnimatePresence>
       </main>
 
-      <Footer onNavigate={navigateTo} onContact={setContactModal} onLegal={setLegalModal} />
+      <Footer onNavigate={navigateTo} onContact={setContactModal} onLegal={setLegalModal} isMobile={isMobile} />
 
       <AnimatePresence>
         {selectedArticle && (

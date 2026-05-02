@@ -12,7 +12,7 @@ const Step = ({ num, title, delay, isMobile }) => (
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'flex-start',
       textAlign: 'center',
       gap: '1.5rem',
       zIndex: 10,

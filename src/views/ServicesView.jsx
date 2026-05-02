@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import ConsultButton from '../components/ConsultButton.jsx';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const ServiceCategory = ({ title, desc, includes, delay, isMobile }) => (
   <motion.div
@@ -22,17 +23,21 @@ const ServiceCategory = ({ title, desc, includes, delay, isMobile }) => (
       minHeight: isMobile ? '380px' : '450px'
     }}
   >
-    <h3 style={{ fontSize: '1.4rem', color: 'var(--color-primary)', marginBottom: '0.75rem' }}>{title}</h3>
-    <p style={{ color: 'var(--color-text)', marginBottom: '1.5rem', fontSize: '0.95rem' }}>{desc}</p>
-    <div style={{ fontWeight: 600, color: 'var(--color-primary)', marginBottom: '0.75rem', fontSize: '0.9rem' }}>Includes:</div>
-    <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: 'auto' }}>
-      {includes.map((item, i) => (
-        <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.95rem', color: 'var(--color-text)' }}>
-          <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--color-secondary)', flexShrink: 0 }}></div>
-          {item}
-        </li>
-      ))}
-    </ul>
+    <div style={{ minHeight: '110px', marginBottom: '1.5rem' }}>
+      <h3 style={{ fontSize: '1.4rem', color: 'var(--color-primary)', marginBottom: '0.75rem' }}>{title}</h3>
+      <p style={{ color: 'var(--color-text)', fontSize: '0.95rem', lineHeight: 1.5 }}>{desc}</p>
+    </div>
+    <div style={{ marginTop: 'auto' }}>
+      <div style={{ fontWeight: 600, color: 'var(--color-primary)', marginBottom: '1.25rem', fontSize: '0.9rem' }}>Includes:</div>
+      <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+        {includes.map((item, i) => (
+          <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.95rem', color: 'var(--color-text)' }}>
+            <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--color-secondary)', flexShrink: 0 }}></div>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
   </motion.div>
 );
 
@@ -51,7 +56,7 @@ const ServicesView = ({ onNavigate, onContact, isMobile }) => {
     if (!scrollRef.current) return;
     const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
     const maxScroll = scrollWidth - clientWidth;
-    
+
     if (maxScroll <= 0) return;
 
     // Map the scroll progress (0-1) to the number of dots (0 to services.length - 1)
@@ -61,6 +66,36 @@ const ServicesView = ({ onNavigate, onContact, isMobile }) => {
     if (newIndex !== activeIdx && newIndex >= 0 && newIndex < services.length) {
       setActiveIdx(newIndex);
     }
+  };
+
+  const scrollCarousel = (direction) => {
+    if (!scrollRef.current) return;
+    const { scrollLeft, clientWidth } = scrollRef.current;
+    const scrollAmount = clientWidth * 0.6; // Scroll 60% of width for smooth transition
+
+    scrollRef.current.scrollTo({
+      left: direction === 'left' ? scrollLeft - scrollAmount : scrollLeft + scrollAmount,
+      behavior: 'smooth'
+    });
+  };
+
+  const arrowButtonStyle = {
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    width: '45px',
+    height: '45px',
+    borderRadius: '50%',
+    background: 'white',
+    border: '1px solid var(--color-secondary)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'var(--color-primary)',
+    cursor: 'pointer',
+    zIndex: 20,
+    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+    transition: 'all 0.3s ease',
   };
 
   return (
@@ -113,22 +148,46 @@ const ServicesView = ({ onNavigate, onContact, isMobile }) => {
 
           {/* --- UNIFIED CAROUSEL (Desktop & Mobile) --- */}
           <div style={{ width: '100%', marginBottom: '5rem' }}>
-            <div 
-              ref={scrollRef} 
-              onScroll={handleScroll} 
-              className="mobile-features-carousel"
-              style={{
-                padding: '1rem 0',
-                gap: '0',
-                alignItems: 'stretch',
-                display: 'flex'
-              }}
-            >
-              {services.map((svc, i) => (
-                <div key={i} className={isMobile ? "mobile-square-card-wrapper" : ""} style={!isMobile ? { flex: '0 0 auto', scrollSnapAlign: 'center', display: 'flex' } : { display: 'flex' }}>
-                  <ServiceCategory {...svc} isMobile={isMobile} delay={0} />
-                </div>
-              ))}
+            <div style={{ position: 'relative' }}>
+              {/* Navigation Arrows */}
+              {!isMobile && (
+                <>
+                  <button
+                    onClick={() => scrollCarousel('left')}
+                    style={{ ...arrowButtonStyle, left: '-40px' }}
+                    onMouseEnter={e => { e.currentTarget.style.background = 'var(--color-secondary)'; e.currentTarget.style.color = 'white'; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = 'white'; e.currentTarget.style.color = 'var(--color-primary)'; }}
+                  >
+                    <ChevronLeft size={24} />
+                  </button>
+                  <button
+                    onClick={() => scrollCarousel('right')}
+                    style={{ ...arrowButtonStyle, right: '-40px' }}
+                    onMouseEnter={e => { e.currentTarget.style.background = 'var(--color-secondary)'; e.currentTarget.style.color = 'white'; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = 'white'; e.currentTarget.style.color = 'var(--color-primary)'; }}
+                  >
+                    <ChevronRight size={24} />
+                  </button>
+                </>
+              )}
+
+              <div
+                ref={scrollRef}
+                onScroll={handleScroll}
+                className="mobile-features-carousel"
+                style={{
+                  padding: '1rem 0',
+                  gap: '0',
+                  alignItems: 'stretch',
+                  display: 'flex'
+                }}
+              >
+                {services.map((svc, i) => (
+                  <div key={i} className={isMobile ? "mobile-square-card-wrapper" : ""} style={!isMobile ? { flex: '0 0 auto', scrollSnapAlign: 'center', display: 'flex' } : { display: 'flex' }}>
+                    <ServiceCategory {...svc} isMobile={isMobile} delay={0} />
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div className="mobile-carousel-dots" style={{ marginTop: '5rem', paddingBottom: '3rem' }}>
@@ -141,7 +200,7 @@ const ServicesView = ({ onNavigate, onContact, isMobile }) => {
                       const { scrollWidth, clientWidth } = scrollRef.current;
                       const maxScroll = scrollWidth - clientWidth;
                       const targetScroll = (idx / (services.length - 1)) * maxScroll;
-                      
+
                       scrollRef.current.scrollTo({
                         left: targetScroll,
                         behavior: 'smooth'
