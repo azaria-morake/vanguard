@@ -483,3 +483,13 @@ button {
   scrollbar-width: thin;
   scrollbar-color: var(--color-border) transparent;
 }
+/* Article Modal Refinements */
+.article-modal-title {
+  font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+  .article-modal-title {
+    font-size: 1.4rem;
+  }
+}
