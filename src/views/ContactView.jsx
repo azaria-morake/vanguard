@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Mail, Phone } from 'lucide-react';
 import ConsultButton from '../components/ConsultButton.jsx';
 
 const ContactView = ({ onContact }) => {
@@ -14,12 +15,13 @@ const ContactView = ({ onContact }) => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleWhatsAppSubmit = (e) => {
+  const handleEmailSubmit = (e) => {
     e.preventDefault();
     const { name, email, message } = formData;
-    const text = `Hello! I'm ${name}.${email ? ` My email is ${email}.` : ''} I'm interested in: ${message}`;
-    const encodedText = encodeURIComponent(text);
-    window.open(`https://wa.me/27788334236?text=${encodedText}`, '_blank');
+    const to = "contact@vanguardlegal.co.za";
+    const subject = encodeURIComponent(`Inquiry from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -55,10 +57,32 @@ const ContactView = ({ onContact }) => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.15 }}
-              style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem', color: 'var(--color-primary)', opacity: 0.8 }}
+              style={{ marginBottom: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}
             >
-              <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--color-secondary)' }}></div>
-              <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>We're based in Sandton, Johannesburg</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: 'var(--color-primary)', opacity: 0.8 }}>
+                <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--color-secondary)' }}></div>
+                <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>We're based in Sandton, Johannesburg</span>
+              </div>
+              
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginTop: '0.5rem' }}>
+                <a 
+                  href="mailto:contact@vanguardlegal.co.za" 
+                  className="btn btn-teal-outline"
+                  style={{ textDecoration: 'none' }}
+                >
+                  <Mail size={18} />
+                  <span>contact@vanguardlegal.co.za</span>
+                </a>
+
+                <a 
+                  href="tel:+27788334236" 
+                  className="btn btn-teal-outline"
+                  style={{ textDecoration: 'none' }}
+                >
+                  <Phone size={18} />
+                  <span>+27 78 833 4236</span>
+                </a>
+              </div>
             </motion.div>
 
             <motion.div
@@ -68,7 +92,7 @@ const ContactView = ({ onContact }) => {
               className="flat-card"
               style={{ padding: '2.5rem', width: '100%', maxWidth: '600px', border: '1px solid var(--color-secondary)' }}
             >
-              <form style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }} onSubmit={handleWhatsAppSubmit}>
+              <form style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }} onSubmit={handleEmailSubmit}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                   <label style={{ fontWeight: 600, color: 'var(--color-primary)', fontSize: '0.9rem' }}>Name</label>
                   <input
@@ -105,8 +129,8 @@ const ContactView = ({ onContact }) => {
                   ></textarea>
                 </div>
 
-                <button type="submit" className="btn btn-teal" style={{ width: '100%', marginTop: '0.5rem' }}>
-                  Send to WhatsApp
+                <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '0.5rem' }}>
+                  Send Email
                 </button>
               </form>
             </motion.div>
