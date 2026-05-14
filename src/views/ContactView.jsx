@@ -63,24 +63,24 @@ const ContactView = ({ onContact }) => {
                 <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--color-secondary)' }}></div>
                 <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>We're based in Sandton, Johannesburg</span>
               </div>
-              
+
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginTop: '0.5rem' }}>
-                <a 
-                  href="mailto:contact@vanguardlegal.co.za" 
+                <a
+                  href="mailto:contact@vanguardlegal.co.za"
                   className="btn btn-teal-outline"
                   style={{ textDecoration: 'none' }}
                 >
                   <Mail size={18} />
-                  <span>contact@vanguardlegal.co.za</span>
+                  <span>Email</span>
                 </a>
 
-                <a 
-                  href="tel:+27788334236" 
+                <a
+                  href="tel:+27788334236"
                   className="btn btn-teal-outline"
                   style={{ textDecoration: 'none' }}
                 >
                   <Phone size={18} />
-                  <span>+27 78 833 4236</span>
+                  <span>Call</span>
                 </a>
               </div>
             </motion.div>
